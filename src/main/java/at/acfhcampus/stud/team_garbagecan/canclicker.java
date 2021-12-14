@@ -4,10 +4,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class canclicker {
-    Timertask
+    TimerTask cond = new TimerTask() {
+        @Override
+        public void run() {
+            trash = +income;
+        }
+    };
     public static void main(String[] args) {
     Timer tick = new Timer();
-    tick.schedule(condition,0,1000 );
+    tick.schedule(cond,0,1000 );
 
 
 
