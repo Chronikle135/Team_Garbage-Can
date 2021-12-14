@@ -3,4 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="16" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Team_Garbage-Can.main" options="--add-exports java.datatransfer/java.awt=at.acfhcampus.stud.team_garbagecan" />
+    </option>
+  </component>
 </project>
