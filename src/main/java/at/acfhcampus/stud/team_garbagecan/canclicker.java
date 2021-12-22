@@ -7,8 +7,8 @@ import javafx.stage.Stage;
 
 public class canclicker extends Application {
     public static void main() {
-        int[] cash = {0};
-        Müllverbrennung müllverbrennung = new Müllverbrennung();
+        int[] cash = {0};                                                   //Array mit einem Element dass die große Variabel für die Hauptwährung ist
+        Müllverbrennung müllverbrennung = new Müllverbrennung();            //Manuelles erstellen von dem Objekt Müllverbrennung, hat
         Timer tick = new Timer();
         TimerTask getting = new TimerTask() {
             @Override
