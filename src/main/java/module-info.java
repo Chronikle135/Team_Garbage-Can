@@ -10,6 +10,6 @@ module at.acfhcampus.stud.team_garbagecan {
 
     opens at.acfhcampus.stud.team_garbagecan to javafx.fxml;
     exports at.acfhcampus.stud.team_garbagecan;
-    exports at.acfhcampus.stud.team_garbagecan.Upgradess;
-    opens at.acfhcampus.stud.team_garbagecan.Upgradess to javafx.fxml;
+    exports at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades;
+    opens at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades to javafx.fxml;
 }

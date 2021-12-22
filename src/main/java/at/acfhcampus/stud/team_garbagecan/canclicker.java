@@ -1,7 +1,7 @@
 package at.acfhcampus.stud.team_garbagecan;
 import java.util.Timer;
 import java.util.TimerTask;
-import at.acfhcampus.stud.team_garbagecan.Upgradess.Müllverbrennung;
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllverbrennung;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

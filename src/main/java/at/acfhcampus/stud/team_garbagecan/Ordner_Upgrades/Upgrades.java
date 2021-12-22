@@ -1,4 +1,4 @@
-package at.acfhcampus.stud.team_garbagecan.Upgradess;
+package at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades;
 
 public abstract class Upgrades {
     public int income;
