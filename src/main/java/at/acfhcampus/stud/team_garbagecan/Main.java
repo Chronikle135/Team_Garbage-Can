@@ -1,4 +1,5 @@
 package at.acfhcampus.stud.team_garbagecan;
+
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllverbrennung;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Upgrades;
 import javafx.application.Application;
@@ -8,11 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Timer;
@@ -74,10 +75,8 @@ public class Main extends Application {
         trashCanBox.getChildren().addAll(garbage, canButton);
 
         shopBox.setMinWidth(200);
-        shopBox.getChildren().addAll(new Text("THIS IS THE SHOP TEST, DO NO PANIC"));
 
         leftSideBox.setMinWidth(200);
-        leftSideBox.getChildren().addAll(new Text("THIS IS JUST A TEST, DO NOT PANIC"));
 
         trashCanBox.setMinHeight(HEIGHT);
         shopBox.setMinHeight(HEIGHT);
@@ -89,7 +88,7 @@ public class Main extends Application {
         leftSideBox.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));*/
 
         containerHBox.getChildren().addAll(leftSideBox, trashCanBox, shopBox);
-        finalcontainer.getChildren().addAll(banner, containerHBox,footer);
+        finalcontainer.getChildren().addAll(banner, containerHBox, footer);
         Scene mainScene = new Scene(finalcontainer, WIDTH, HEIGHT);
         stage.setResizable(false);
         stage.setTitle("Garbage-Clicker");
@@ -97,7 +96,8 @@ public class Main extends Application {
         stage.show();
 
 
-        Müllverbrennung müllverbrennung = new Müllverbrennung();                        //Manuelles erstellen von dem Objekt Müllverbrennung, hat als Werte income, cost, name und amount
+        Müllverbrennung müllverbrennung = new Müllverbrennung();                       //Manuelles erstellen von dem Objekt Müllverbrennung, hat als Werte income, cost, name und amount
+        shopBox.getChildren().add(müllverbrennung.getShopItem());
         Timer tick = new Timer();                                                       //Erstellen eines neuen Timers
         TimerTask getting = new TimerTask() {                                           //Erstellen einer TimerTasks, also einer Aufgabe die mit dem Tick eines Timers ausgeführt wird
             @Override

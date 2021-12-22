@@ -1,6 +1,8 @@
 package at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades;
 
 import at.acfhcampus.stud.team_garbagecan.Main;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -12,13 +14,15 @@ public abstract class Upgrades {                                                
     public int amount;                                                              //Wie oft das Upgrade gekauft wurde
     public int cost;                                                                //Wie viel das Upgrade kostet
     public static List <Upgrades> upgradeList = new ArrayList<>();                  //Erstellen einer Liste die bei der Erstellung eines neuen Upgrades dieses gleich in sich hinzufügt
+    private ShopItem shopItem;
 
-    public Upgrades(int income, int amount, int cost, String name) {                //Ganz normaler Konstruktor für die Upgrades
+    public Upgrades(int income, int amount, int cost, String name, String url) {    //Ganz normaler Konstruktor für die Upgrades
         this.income = income;
         this.amount = amount;
         this.cost = cost;
         this.name = name;
         upgradeList.add(this);                                                      //Fügt das erzeugte Upgrade in die erstellte Liste hinzu
+        shopItem = new ShopItem(new Image(url), this);
     }
 
     public BigInteger calcincome(){
@@ -27,9 +31,15 @@ public abstract class Upgrades {                                                
     public void buy(){
         amount++;                                                                   //Erhöht das Amount eines Upgrades wenn man es kauft
         cost = (int) (cost*Math.exp(amount/7));                                     //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nächsten Kosten des Upgradekaufes
+        shopItem.incAmount();
+        shopItem.setPrice(cost);
     }
     public void checkIfMoney(){
         if ( Main.getCash().longValue() >= cost) buy();                             //checkt ob wir genug Währung haben um uns ein Upgrade zu kaufen, wenn ja wird es gekauft
         else System.out.println("WE DON´T HAVE THE CAPACITIES");                    //Wenn wir nicht genug Währung haben wird eine Fehlermeldung aufgeführt.
+    }
+
+    public HBox getShopItem() {
+        return shopItem.getShopElements();
     }
 }
