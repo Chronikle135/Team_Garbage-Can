@@ -1,6 +1,7 @@
 package at.acfhcampus.stud.team_garbagecan;
 
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllverbrennung;
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Upgrades;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -8,20 +9,14 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Main extends Application {
-    BigInteger cash = new BigInteger("0");
+    private static BigInteger cash = new BigInteger("0");
     final private int TICKRATE = 1000;
-
-
-
-
-
 
     public void start(Stage stage) throws IOException {
         /*
@@ -55,18 +50,23 @@ public class Main extends Application {
         stage.show();
 
 
-        //Array mit einem Element dass die große Variabel für die Hauptwährung ist
-        Müllverbrennung müllverbrennung = new Müllverbrennung();            //Manuelles erstellen von dem Objekt Müllverbrennung, hat als Werte income, cost, name und amount
-        Timer tick = new Timer();                                           //Erstellen eines neuen Timers
-        TimerTask getting = new TimerTask() {                               //Erstellen einer TimerTasks, also einer Aufgabe die mit dem Tick eines Timers ausgeführt wird
+        Müllverbrennung müllverbrennung = new Müllverbrennung();                        //Manuelles erstellen von dem Objekt Müllverbrennung, hat als Werte income, cost, name und amount
+        Timer tick = new Timer();                                                       //Erstellen eines neuen Timers
+        TimerTask getting = new TimerTask() {                                           //Erstellen einer TimerTasks, also einer Aufgabe die mit dem Tick eines Timers ausgeführt wird
             @Override
             public void run() {
-                cash = cash.add(müllverbrennung.calcincome());              //Berechnung des aktuellen Währungsstandes plus des incomes der Müllverbrennung
-                garbage.setText(String.format("Amount of Garbage %d", cash));                                   //Zur Kontrolle ob das ganze funktioniert
+                for (Upgrades u : Upgrades.upgradeList) {                               //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                    cash = cash.add(u.calcincome());
+                }
+                garbage.setText(String.format("Amount of Garbage %d", cash));           //Zur Kontrolle ob das ganze funktioniert
             }
         };
-        tick.schedule(getting, 0, TICKRATE);                         //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
+        tick.schedule(getting, 0, TICKRATE);                                      //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
 
+    }
+
+    public static BigInteger getCash() {                                                //Getter damit wir uns die Cashvariabel von überall holen können und sie trotzdem noch protected ist
+        return cash;
     }
 
     public static void main(String[] args) {
