@@ -1,7 +1,7 @@
 package at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades;
 
-public class Müllverbrennung extends Upgrades {
+public class Müllverbrennung extends Upgrades {                                                                         //erstellung des Upgrades mit den richtigen Variablen
     public Müllverbrennung() {
-        super(50, 1, 30, "Müllverbrennung");
+        super(50,1,2,"müllverbrennung");
     }
 }
