@@ -1,0 +1,102 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Upgrades {
+    int income
+    String name
+    int amount
+    int cost
+    List<Upgrades> upgradeList
+    ShopItem shopItem
+    --
+    Upgrades(int, int, int, String, String)
+    calcIncome() : BigInteger
+    buy() : Void
+    checkIfMoney() : Void
+    getShopItem() : HBox
+}
+abstract class Upgrades2 {
+    int clickingPowerMod
+    String name
+    int amount
+    int cost
+    List<Upgrades> upgrade2List
+    ShopItem shopItem2
+    --
+    Upgrades(int, int, int, String, String)
+    calcClickingPower() : int
+    buy() : Void
+    checkIfMoney() : Void
+    getShopItem() : HBox
+}
+class Müllabfuhr {
+    income = TBD
+    cost = 250
+}
+class Müllverbrennung {
+    income = 10
+    cost = 5
+}
+class ÖffentlicheMülltone {
+    income = TBD
+    cost = 120
+}
+class ShopItem {
+    HBox shopElements
+    VBox irgendwie
+    ImageView icon
+    Button buy
+    Text name
+    Text price
+    Text amount
+    --
+    ShopItem2(Image, Upgrades)
+    getShopElements() : HBox
+    incAmount() : Void
+    setPrice(int) : Void
+}
+class ShopItem2 {
+    HBox shopElements
+    VBox irgendwie
+    ImageView icon
+    Button buy
+    Text name
+    Text price
+    Text amount
+    --
+    ShopItem(Image, Upgrades)
+    getShopElements() : HBox
+    incAmount() : Void
+    setPrice(int) : Void
+}
+
+class Main {
+    {static} int TICKRATE
+    {static} int WIDTH
+    {static} int HEIGHT
+    --
+    int clickingPower
+    BigInteger cash
+    --
+    HBox container
+    VBox shopBox
+    VBox trashCanBox
+    VBox leftSideBox
+    VBox finalContainer
+    HBox banner
+    HBox footer
+    --
+    getCash() : BigInteger
+    main() : Void
+    visibility(Upgrades u) : boolean
+}
+
+Main -- Upgrades : Contains >
+Upgrades -- Müllabfuhr : extends >
+Upgrades -- Müllverbrennung : extends >
+Upgrades -- ÖffentlicheMülltone : extends >
+Upgrades -- ShopItem : contains >
+Upgrades2 -- ShopItem2 : contains >
+Main -- Upgrades2 : Contains >
+
+@enduml
