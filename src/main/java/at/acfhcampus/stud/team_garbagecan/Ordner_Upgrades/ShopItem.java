@@ -7,12 +7,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import static at.acfhcampus.stud.team_garbagecan.Main.visibility;
-
 public class ShopItem {
 
+    /* Eigenschaften des Shopitems */
     HBox shopElements;
-    VBox irgendwie;
+    VBox zwischenContainer;
     ImageView icon;
     Button buy;
     Text name;
@@ -20,32 +19,34 @@ public class ShopItem {
     Text amount;
 
     public ShopItem(Image image, Upgrades upgrades) {
-        icon = new ImageView(image);
-        icon.setFitHeight(32);
+        icon = new ImageView(image);                                                                //Icon das beim erstellen des Shopitems zugewiesen wird
+        icon.setFitHeight(32);                                                                      //Höhe und Breite des Icons
         icon.setFitWidth(32);
-        shopElements = new HBox();
-        buy = new Button();
-        buy.setOnMouseClicked(e -> upgrades.checkIfMoney());
-        this.name = new Text(upgrades.name + "");
+        shopElements = new HBox();                                                                  //Erstellen der Box in der alle Elemente des Upgrades drinnen sind
+        buy = new Button();                                                                         //Button zum kaufen des Upgrades
+        buy.setOnMouseClicked(e -> upgrades.checkIfMoney());                                        //Klickevent checkt zuerst ob man genug Geld hat, wenn ja wird es gekauft, wenn nein dann gibt es eine Fehlermeldung
+        this.name = new Text(upgrades.name + "");                                                   //Erstellen der Textfelder für den Namen, Preis und Anzahl des Upgrades
         this.price = new Text(String.format("Price: %d", upgrades.cost));
         this.amount = new Text(String.format("Amount: %d", upgrades.amount));
-        this.irgendwie = new VBox();
-        irgendwie.getChildren().addAll(name, price,amount);
-        irgendwie.setSpacing(1);
+        this.zwischenContainer = new VBox();                                                        //Neue Box in der dann alle Eigenschaften des Upgrades sind zum besseren Handhaben
+        zwischenContainer.getChildren().addAll(name, price, amount);                                //Aufnehmen der Eigenschaften in dem Zwischencontainer
+        zwischenContainer.setSpacing(1);                                                            //Weitere Formatierung
         shopElements.setSpacing(5);
-        shopElements.getChildren().addAll(icon, buy, irgendwie);
-        /*shopElements.setVisible(visibility(upgrades));*/
+        shopElements.getChildren().addAll(icon, buy, zwischenContainer);                            //Aufnehmen der restlichen Eigenschaften und der Zwischenbox im finalen Shopelement
+        shopElements.setVisible(false);                                                             //Sichtbarkeit der Shopbox
     }
 
-    public HBox getShopElements() {
+    /* Funktionen der Shopitems */
+
+    public HBox getShopElements() {                                                                 //Getter für die Elemente
         return shopElements;
     }
 
-    public void incAmount() {
+    public void incAmount() {                                                                       //Funktion zur Anzeige der Anzahl eines Upgrades im Besitz
         amount.setText(String.format("Amount: %d", Integer.parseInt(amount.getText().split(" ")[1]) + 1));
     }
 
-    public void setPrice(int newPrice) {
+    public void setPrice(int newPrice) {                                                            //Funktion zur Anzeige des Preises eines Upgrades
         price.setText(String.format("Price: %d", newPrice));
     }
 }
