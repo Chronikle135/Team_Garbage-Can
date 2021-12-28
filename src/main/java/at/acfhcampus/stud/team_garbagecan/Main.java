@@ -42,6 +42,11 @@ public class Main extends Application {
 
 
     public void start(Stage stage) throws IOException {
+        /* Objekte und Upggrades die wir brauchen */
+        Müllverbrennung müllverbrennung = new Müllverbrennung();                       //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
+        Müllabfuhr müllabfuhr = new Müllabfuhr();
+        ÖffentlicheMülltonne öffentlicheMülltonne = new ÖffentlicheMülltonne();
+
         /* GUI Initialisierungen */
         Image icon = new Image("/at/acfhcampus/stud/team_garbagecan/garbage-can.png");
         Text text = new Text();
@@ -108,10 +113,6 @@ public class Main extends Application {
         stage.setScene(mainScene);
         stage.show();
 
-        /* Objekte und Upggrades die wir brauchen */
-        Müllverbrennung müllverbrennung = new Müllverbrennung();                       //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
-        Müllabfuhr müllabfuhr = new Müllabfuhr();
-        ÖffentlicheMülltonne öffentlicheMülltonne = new ÖffentlicheMülltonne();
 
         /* Timer und seine Funktionen */
         Timer tick = new Timer();                                                       //Erstellen eines neuen Timers
@@ -122,6 +123,7 @@ public class Main extends Application {
                     cash = cash.add(u.calcincome());
                     u.getShopItem().setVisible(visibility(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
                 }
+                garbage.setText(String.format("Amount of Garbage %d", cash.longValue()));
             }
         };
         tick.schedule(getting, 0, TICKRATE);                                      //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
