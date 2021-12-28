@@ -7,6 +7,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import static at.acfhcampus.stud.team_garbagecan.Main.visibility;
+
 public class ShopItem {
 
     HBox shopElements;
@@ -32,6 +34,7 @@ public class ShopItem {
         irgendwie.setSpacing(1);
         shopElements.setSpacing(5);
         shopElements.getChildren().addAll(icon, buy, irgendwie);
+        /*shopElements.setVisible(visibility(upgrades));*/
     }
 
     public HBox getShopElements() {

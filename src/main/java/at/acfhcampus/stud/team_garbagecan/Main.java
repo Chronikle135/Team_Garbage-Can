@@ -1,14 +1,17 @@
 package at.acfhcampus.stud.team_garbagecan;
 
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllabfuhr;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllverbrennung;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Upgrades;
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.ÖffentlicheMülltonne;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -97,19 +100,23 @@ public class Main extends Application {
 
 
         Müllverbrennung müllverbrennung = new Müllverbrennung();                       //Manuelles erstellen von dem Objekt Müllverbrennung, hat als Werte income, cost, name und amount
-        shopBox.getChildren().add(müllverbrennung.getShopItem());
+        Müllabfuhr müllabfuhr = new Müllabfuhr();
+        ÖffentlicheMülltonne öffentlicheMülltonne = new ÖffentlicheMülltonne();
+        for (Upgrades u : Upgrades.upgradeList) {
+            shopBox.getChildren().add(u.getShopItem());
+        }
         Timer tick = new Timer();                                                       //Erstellen eines neuen Timers
         TimerTask getting = new TimerTask() {                                           //Erstellen einer TimerTasks, also einer Aufgabe die mit dem Tick eines Timers ausgeführt wird
             @Override
             public void run() {
                 for (Upgrades u : Upgrades.upgradeList) {                               //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
                     cash = cash.add(u.calcincome());
+                    visibility(u);
                 }
                 garbage.setText(String.format("Amount of Garbage%n%d", cash));           //Zur Kontrolle ob das ganze funktioniert
             }
         };
         tick.schedule(getting, 0, TICKRATE);                                      //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
-
     }
 
     private void clicki() {
@@ -122,5 +129,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static boolean visibility(Upgrades irgendwas) {
+        return irgendwas.cost <= getCash().doubleValue();
     }
 }

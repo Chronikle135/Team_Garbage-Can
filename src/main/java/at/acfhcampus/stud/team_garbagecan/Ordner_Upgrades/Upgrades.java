@@ -30,7 +30,7 @@ public abstract class Upgrades {                                                
     }
     public void buy(){
         amount++;                                                                   //Erhöht das Amount eines Upgrades wenn man es kauft
-        cost = (int) (cost+Math.exp(amount*0.5));                                     //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nächsten Kosten des Upgradekaufes
+        cost = (int) (cost+Math.exp(amount*0.5));                                   //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nächsten Kosten des Upgradekaufes
         shopItem.incAmount();
         shopItem.setPrice(cost);
     }
