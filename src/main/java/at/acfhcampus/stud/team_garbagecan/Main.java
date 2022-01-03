@@ -4,6 +4,7 @@ import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllabfuhr;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllverbrennung;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Upgrades;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.ÖffentlicheMülltonne;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Upgrade2;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -85,6 +86,9 @@ public class Main extends Application {
         /* Linke Box */
         leftSideBox.setMinWidth(200);
         leftSideBox.setMinHeight(HEIGHT);
+        for (Upgrade2 u : Upgrade2.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            leftSideBox.getChildren().add(u.getShopItem());
+        }
 
         /* Rechte/Shop Box */
         rigthSideBox.setMinWidth(200);
