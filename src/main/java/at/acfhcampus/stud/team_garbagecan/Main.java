@@ -11,17 +11,22 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static at.acfhcampus.stud.team_garbagecan.Main.getCash;
 
 public class Main extends Application {
     /* Globale Variablen */
@@ -34,12 +39,14 @@ public class Main extends Application {
 
     /* GUI Elemente */
     private HBox containerHBox = new HBox();
-    private VBox rigthSideBox = new VBox();
+    private VBox rigthSideBoxTop = new VBox();
+    private VBox rigthSideBoxBottom = new VBox();
     private VBox middleBox = new VBox();
     private VBox leftSideBox = new VBox();
     private VBox finalcontainer = new VBox();
     private HBox banner = new HBox();
     private HBox footer = new HBox();
+    ImageView store;
 
 
     public void start(Stage stage) throws IOException {
@@ -58,8 +65,9 @@ public class Main extends Application {
         text.setText("GARBAGE-CLICKER");
         text.setX(50);
         text.setY(50);
-        text.setFont(Font.font("Verdana", 30));
-        garbage.setFont(Font.font("Verdana", 20));
+        text.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
+        garbage.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        garbage.setFill(Color.WHITE);
         garbage.setTextAlignment(TextAlignment.CENTER);
 
 
@@ -73,7 +81,15 @@ public class Main extends Application {
         canButton.setOnMouseClicked(e -> clicki());                                   //Klickevent beim drücken des Buttons
 
 
+
         /* Boxensystem */
+
+        /* Banner */
+
+        banner.setMinWidth(WIDTH);
+        banner.setMinHeight(100);
+        banner.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/banner.jpg);");
+
 
         /* Mittlere Box */
         middleBox.setSpacing(30);
@@ -81,25 +97,52 @@ public class Main extends Application {
         middleBox.setMinWidth(300);
         middleBox.setPadding(new Insets(20, 10, 20, 10));
         middleBox.getChildren().addAll(garbage, canButton);
-        middleBox.setMinHeight(HEIGHT);
+        middleBox.setMinHeight(HEIGHT-100);
+        middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/metalldark.jpg);" +
+                "-fx-border-color: black;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-width: 5;");
 
         /* Linke Box */
         leftSideBox.setMinWidth(200);
-        leftSideBox.setMinHeight(HEIGHT);
+        leftSideBox.setMinHeight(HEIGHT-100);
+        leftSideBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/metall.jpg);" +
+                "-fx-border-left: black;" +
+                "-fx-border-style: solid none solid solid;" +
+                "-fx-border-width: 5;");
+
+        /* Rechte/Shop Box Top */
+        rigthSideBoxTop.setMinWidth(200);
+        rigthSideBoxTop.setMinHeight((HEIGHT/2)-100);
+        rigthSideBoxTop.setPadding(new Insets(5, 5, 20, 0));
+        rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/metall.jpg);" +
+                "-fx-border-color: black;" +
+                "-fx-border-style: solid solid solid none;" +
+                "-fx-border-width: 5;");
+        //store = new ImageView("url(/at/acfhcampus/stud/team_garbagecan/store.jpg)");
+        for (Upgrades u : Upgrades.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            rigthSideBoxTop.getChildren().add(u.getShopItem());
+        }
+
+
+
+
+        /* Rechte/Shop Box Bottom */
+        rigthSideBoxBottom.setMinWidth(200);
+        rigthSideBoxBottom.setMinHeight((HEIGHT/2)-100);
+
+        rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-width: 5;");
         for (Upgrade2 u : Upgrade2.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             leftSideBox.getChildren().add(u.getShopItem());
         }
 
-        /* Rechte/Shop Box */
-        rigthSideBox.setMinWidth(200);
-        rigthSideBox.setMinHeight(HEIGHT);
-        for (Upgrades u : Upgrades.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
-            rigthSideBox.getChildren().add(u.getShopItem());
-        }
+
 
         /* Box in der die mittlere, rechte und linke Box sind */
         containerHBox.setMaxHeight(HEIGHT);
-        containerHBox.getChildren().addAll(leftSideBox, middleBox, rigthSideBox);
+        containerHBox.getChildren().addAll(banner, leftSideBox, middleBox, rigthSideBoxTop, rigthSideBoxBottom);
 
         /* Fertige Box in der alle anderen drinnen sind */
         finalcontainer.getChildren().addAll(banner, containerHBox, footer);
@@ -127,7 +170,7 @@ public class Main extends Application {
                     cash = cash.add(u.calcincome());
                     u.getShopItem().setVisible(visibility(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
                 }
-                garbage.setText(String.format("Amount of Garbage %d", cash.longValue()));
+                garbage.setText(String.format("Amount of Garbage %n%d", cash.longValue()));
             }
         };
         tick.schedule(getting, 0, TICKRATE);                                      //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
@@ -136,6 +179,9 @@ public class Main extends Application {
     /* Funktionen die wir brauchen */
     private void clicki() {                                                             //Klickevent dass bei jedem Klick passiert
         cash = cash.add(BigInteger.valueOf(clickingPower));                             //clickingPower gibt an wie viel Währung man pro Klick bekommt
+
+
+
     }
 
     public static BigInteger getCash() {                                                //Getter damit wir uns die Cashvariabel von überall holen können und sie trotzdem noch protected ist

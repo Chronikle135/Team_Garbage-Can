@@ -1,5 +1,6 @@
 package at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades;
 
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 
@@ -42,10 +43,16 @@ public abstract class Upgrades {                                                
     }
 
     public void checkIfMoney() {
-        if (getCash().longValue() >= cost)
+        if (getCash().longValue() >= cost) {
             buy();                                                                  //checkt ob wir genug Währung haben um uns ein Upgrade zu kaufen, wenn ja wird es gekauft
-        else
+            }
+        else {
             System.out.println("WE DON´T HAVE THE CAPACITIES");                    //Wenn wir nicht genug Währung haben wird eine Fehlermeldung aufgeführt.
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("WE DON´T HAVE THE CAPACITIES");
+            a.show();
+            }
     }
 
     public HBox getShopItem() {                                                     //Getter für die einzelnen Shopitems
