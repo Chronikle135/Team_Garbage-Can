@@ -4,8 +4,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 
-import javax.swing.*;
-import java.awt.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;

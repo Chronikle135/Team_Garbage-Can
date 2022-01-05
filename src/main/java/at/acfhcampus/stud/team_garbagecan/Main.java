@@ -4,6 +4,7 @@ import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllabfuhr;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllverbrennung;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Upgrades;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.ÖffentlicheMülltonne;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Müllspieß;
 import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Upgrade2;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -54,6 +55,7 @@ public class Main extends Application {
         Müllverbrennung müllverbrennung = new Müllverbrennung();                       //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
         Müllabfuhr müllabfuhr = new Müllabfuhr();
         ÖffentlicheMülltonne öffentlicheMülltonne = new ÖffentlicheMülltonne();
+        Müllspieß müllspieß = new Müllspieß();
 
         /* GUI Initialisierungen */
         Image icon = new Image("/at/acfhcampus/stud/team_garbagecan/garbage-can.png");
@@ -134,8 +136,8 @@ public class Main extends Application {
         rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
                 "-fx-border-style: solid;" +
                 "-fx-border-width: 5;");
-        for (Upgrade2 u : Upgrade2.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
-            leftSideBox.getChildren().add(u.getShopItem());
+        for (Upgrade2 u : Upgrade2.upgradeList2) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            leftSideBox.getChildren().add(u.getShopItem2());
         }
 
 
@@ -170,6 +172,9 @@ public class Main extends Application {
                     cash = cash.add(u.calcincome());
                     u.getShopItem().setVisible(visibility(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
                 }
+                for (Upgrade2 u : Upgrade2.upgradeList2) {                               //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                    u.getShopItem2().setVisible(visibility2(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                }
                 garbage.setText(String.format("Amount of Garbage %n%d", cash.longValue()));
             }
         };
@@ -188,8 +193,13 @@ public class Main extends Application {
         return cash;
     }
 
-    public static boolean visibility(Upgrades irgendwas) {                              //Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
-        return irgendwas.cost <= getCash().doubleValue();
+    public static boolean visibility(Upgrades irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+        if (irgendwas.getShopItem().isVisible()) return true;
+        else return irgendwas.cost <= getCash().doubleValue();
+    }
+    public static boolean visibility2(Upgrade2 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+        if (irgendwas.getShopItem2().isVisible()) return true;
+        else return irgendwas.cost <= getCash().doubleValue();
     }
 
     public static void setCash(BigInteger cash) {                                       //Setter für unsere Währung

@@ -7,9 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.awt.*;
-
-public class ShopItem2 {
+public class ShopItem2{
 
         /* Eigenschaften des Shopitems */
         HBox shopElements;
