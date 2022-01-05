@@ -4,6 +4,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 
+import javax.swing.*;
+import java.awt.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +49,31 @@ public abstract class Upgrades {                                                
             buy();                                                                  //checkt ob wir genug Währung haben um uns ein Upgrade zu kaufen, wenn ja wird es gekauft
             }
         else {
-            System.out.println("WE DON´T HAVE THE CAPACITIES");                    //Wenn wir nicht genug Währung haben wird eine Fehlermeldung aufgeführt.
+            System.out.println("WE DON´T HAVE THE CAPACITIES");//Wenn wir nicht genug Währung haben wird eine Fehlermeldung aufgeführt.
+
+            /*JFrame achtung = new JFrame();
+            achtung.setSize(200,200);
+            achtung.setBackground(Color.red);
+            achtung.setVisible(true);
+            achtung.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+            JPanel caution = new JPanel();
+            caution.setBounds(100,100,100,100);
+            caution.setBackground(Color.red);
+            achtung.add(caution);
+
+            JLabel text = new JLabel("You can't afford this upgrade!");
+            text.setForeground(Color.black);
+            text.setBackground(Color.red);
+            text.add(caution);*/
+
+
 
             Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setContentText("WE DON´T HAVE THE CAPACITIES");
-            a.show();
+            a.setContentText("WE DON´T HAVE THE CAPACITIES");           // Anzeige der Fehlermeldung
+            a.showAndWait();                                            // wartet darauf dass man ok drückt
+            a.setAlertType(Alert.AlertType.ERROR);                      // macht das rote X
             }
     }
 
