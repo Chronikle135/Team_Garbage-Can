@@ -6,6 +6,20 @@ import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Upgrades;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.ÖffentlicheMülltonne;
 import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Müllspieß;
 import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Upgrade2;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_3.Müllcontainer;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_3.Upgrade3;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_4.Freiwillige_Helfer;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_4.Upgrade4;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_5.Mülllaster;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_5.Upgrade5;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_6.Trashforce;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_6.Upgrade6;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_7.Müllmagnet;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_7.Upgrade7;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_8.Müllangel;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_8.Upgrade8;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_9.Mülltrennung;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_9.Upgrade9;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -55,9 +69,16 @@ public class Main extends Application {
         /* Objekte und Upggrades die wir brauchen */
         Müllverbrennung müllverbrennung = new Müllverbrennung();                       //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
         Müllabfuhr müllabfuhr = new Müllabfuhr();
-        ÖffentlicheMülltonne öffentlicheMülltonne = new ÖffentlicheMülltonne();
+        ÖffentlicheMülltonne ÖffentlicheMülltonne = new ÖffentlicheMülltonne();
         Müllspieß müllspieß = new Müllspieß();
-
+        Müllcontainer müllcontainer = new Müllcontainer();
+        Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
+        Mülllaster mülllaster = new Mülllaster();
+        Trashforce trashforce = new Trashforce();
+        Müllmagnet müllmagnet = new Müllmagnet();
+        Müllangel müllangel = new Müllangel();
+        Mülltrennung mülltrennung = new Mülltrennung();
+        
         /* GUI Initialisierungen */
         Image icon = new Image("/at/acfhcampus/stud/team_garbagecan/garbage-can.png");
         Text text = new Text();
@@ -140,6 +161,83 @@ public class Main extends Application {
         for (Upgrade2 u : Upgrade2.upgradeList2) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             leftSideBox.getChildren().add(u.getShopItem2());
         }
+        
+        /* Rechte/Shop Box Bottom */
+        rigthSideBoxBottom.setMinWidth(200);
+        rigthSideBoxBottom.setMinHeight((HEIGHT/2)-100);
+
+        rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-width: 5;");
+        for (Upgrade3 u : Upgrade3.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            leftSideBox.getChildren().add(u.getShopItem());
+        }
+
+        /* Rechte/Shop Box Bottom */
+        rigthSideBoxBottom.setMinWidth(200);
+        rigthSideBoxBottom.setMinHeight((HEIGHT/2)-100);
+
+        rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-width: 5;");
+        for (Upgrade4 u : Upgrade4.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            leftSideBox.getChildren().add(u.getShopItem());
+        }
+
+        /* Rechte/Shop Box Bottom */
+        rigthSideBoxBottom.setMinWidth(200);
+        rigthSideBoxBottom.setMinHeight((HEIGHT/2)-100);
+
+        rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-width: 5;");
+        for (Upgrade5 u : Upgrade5.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            leftSideBox.getChildren().add(u.getShopItem());
+        }
+
+        /* Rechte/Shop Box Bottom */
+        rigthSideBoxBottom.setMinWidth(200);
+        rigthSideBoxBottom.setMinHeight((HEIGHT/2)-100);
+
+        rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-width: 5;");
+        for (Upgrade6 u : Upgrade6.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            leftSideBox.getChildren().add(u.getShopItem());
+        }
+
+        /* Rechte/Shop Box Bottom */
+        rigthSideBoxBottom.setMinWidth(200);
+        rigthSideBoxBottom.setMinHeight((HEIGHT/2)-100);
+
+        rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-width: 5;");
+        for (Upgrade7 u : Upgrade7.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            leftSideBox.getChildren().add(u.getShopItem());
+        }
+
+        /* Rechte/Shop Box Bottom */
+        rigthSideBoxBottom.setMinWidth(200);
+        rigthSideBoxBottom.setMinHeight((HEIGHT/2)-100);
+
+        rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-width: 5;");
+        for (Upgrade8 u : Upgrade8.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            leftSideBox.getChildren().add(u.getShopItem());
+        }
+
+        /* Rechte/Shop Box Bottom */
+        rigthSideBoxBottom.setMinWidth(200);
+        rigthSideBoxBottom.setMinHeight((HEIGHT/2)-100);
+
+        rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-width: 5;");
+        for (Upgrade9 u : Upgrade9.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+            leftSideBox.getChildren().add(u.getShopItem());
+        }
 
 
 
@@ -175,6 +273,27 @@ public class Main extends Application {
                 }
                 for (Upgrade2 u : Upgrade2.upgradeList2) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
                     u.getShopItem2().setVisible(visibility2(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                }
+                for (Upgrade3 u : Upgrade3.upgradeList) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                    u.getShopItem().setVisible(visibility3(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                }
+                for (Upgrade4 u : Upgrade4.upgradeList) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                    u.getShopItem().setVisible(visibility4(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                }
+                for (Upgrade5 u : Upgrade5.upgradeList) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                    u.getShopItem().setVisible(visibility5(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                }
+                for (Upgrade6 u : Upgrade6.upgradeList) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                    u.getShopItem().setVisible(visibility6(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                }
+                for (Upgrade7 u : Upgrade7.upgradeList) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                    u.getShopItem().setVisible(visibility7(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                }
+                for (Upgrade8 u : Upgrade8.upgradeList) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                    u.getShopItem().setVisible(visibility8(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                }
+                for (Upgrade9 u : Upgrade9.upgradeList) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                    u.getShopItem().setVisible(visibility9(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
                 }
             }
         };
@@ -212,6 +331,34 @@ public class Main extends Application {
     }
     public static boolean visibility2(Upgrade2 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
         if (irgendwas.getShopItem2().isVisible()) return true;
+        else return irgendwas.cost <= getCash().doubleValue();
+    }
+    public static boolean visibility3(Upgrade3 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+        if (irgendwas.getShopItem().isVisible()) return true;
+        else return irgendwas.cost <= getCash().doubleValue();
+    }
+    public static boolean visibility4(Upgrade4 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+        if (irgendwas.getShopItem().isVisible()) return true;
+        else return irgendwas.cost <= getCash().doubleValue();
+    }
+    public static boolean visibility5(Upgrade5 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+        if (irgendwas.getShopItem().isVisible()) return true;
+        else return irgendwas.cost <= getCash().doubleValue();
+    }
+    public static boolean visibility6(Upgrade6 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+        if (irgendwas.getShopItem().isVisible()) return true;
+        else return irgendwas.cost <= getCash().doubleValue();
+    }
+    public static boolean visibility7(Upgrade7 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+        if (irgendwas.getShopItem().isVisible()) return true;
+        else return irgendwas.cost <= getCash().doubleValue();
+    }
+    public static boolean visibility8(Upgrade8 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+        if (irgendwas.getShopItem().isVisible()) return true;
+        else return irgendwas.cost <= getCash().doubleValue();
+    }
+    public static boolean visibility9(Upgrade9 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+        if (irgendwas.getShopItem().isVisible()) return true;
         else return irgendwas.cost <= getCash().doubleValue();
     }
 
