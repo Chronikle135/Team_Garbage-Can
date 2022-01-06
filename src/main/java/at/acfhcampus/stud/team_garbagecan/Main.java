@@ -35,7 +35,8 @@ public class Main extends Application {
     final private int TICKRATE = 1000;
     private final int WIDTH = 200 + 200 + 300;
     private final int HEIGHT = 700;
-    private int clickingPower = 1;
+    int clickingPower = 1;
+    int changeTo;
 
 
     /* GUI Elemente */
@@ -164,29 +165,35 @@ public class Main extends Application {
 
 
         /* Timer und seine Funktionen */
-        Timer tick = new Timer();                                                       //Erstellen eines neuen Timers
-        TimerTask getting = new TimerTask() {                                           //Erstellen einer TimerTasks, also einer Aufgabe die mit dem Tick eines Timers ausgeführt wird
+        Timer tick = new Timer();                                                         //Erstellen eines neuen Timers
+        TimerTask getting = new TimerTask() {                                             //Erstellen einer TimerTasks, also einer Aufgabe die mit dem Tick eines Timers ausgeführt wird
             @Override
             public void run() {
-                for (Upgrades u : Upgrades.upgradeList) {                               //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                for (Upgrades u : Upgrades.upgradeList) {                                 //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
                     cash = cash.add(u.calcincome());
-                    u.getShopItem().setVisible(visibility(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                    u.getShopItem().setVisible(visibility(u));                            //Überprüfung der Sichtbarkeit jedes Upgrades
                 }
-                for (Upgrade2 u : Upgrade2.upgradeList2) {                               //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                for (Upgrade2 u : Upgrade2.upgradeList2) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
                     u.getShopItem2().setVisible(visibility2(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
                 }
                 garbage.setText(String.format("Amount of Garbage %n%d", cash.longValue()));
             }
         };
-        tick.schedule(getting, 0, TICKRATE);                                      //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
+        tick.schedule(getting, 0, TICKRATE);                                        //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
     }
 
     /* Funktionen die wir brauchen */
     private void clicki() {                                                             //Klickevent dass bei jedem Klick passiert
+        for (Upgrade2 u: Upgrade2.upgradeList2) {
+            changeTo += (u.getClickpower()*u.getAmount());
+        }
+        clickingPower = changeTo+1;
+        changeTo = 0;
         cash = cash.add(BigInteger.valueOf(clickingPower));                             //clickingPower gibt an wie viel Währung man pro Klick bekommt
+    }
 
-
-
+    public void setClickingPower(int clickingPower) {
+        this.clickingPower = clickingPower;
     }
 
     public static BigInteger getCash() {                                                //Getter damit wir uns die Cashvariabel von überall holen können und sie trotzdem noch protected ist

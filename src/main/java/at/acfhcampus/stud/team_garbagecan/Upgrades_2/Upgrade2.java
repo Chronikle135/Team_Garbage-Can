@@ -47,6 +47,14 @@ public abstract class Upgrade2 {
             System.out.println("WE DON´T HAVE THE CAPACITIES");                    //Wenn wir nicht genug WÃ¤hrung haben wird eine Fehlermeldung aufgefÃ¼hrt.
     }
 
+    public int getClickpower() {
+        return clickpower;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
     public HBox getShopItem2() {                                                     //Getter fÃ¼r die einzelnen Shopitems
         return shopItem2.getShopElements();
     }
