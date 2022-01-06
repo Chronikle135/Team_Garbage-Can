@@ -176,10 +176,16 @@ public class Main extends Application {
                 for (Upgrade2 u : Upgrade2.upgradeList2) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
                     u.getShopItem2().setVisible(visibility2(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
                 }
+            }
+        };
+        TimerTask money = new TimerTask() {
+            @Override
+            public void run() {
                 garbage.setText(String.format("Amount of Garbage %n%d", cash.longValue()));
             }
         };
         tick.schedule(getting, 0, TICKRATE);                                        //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
+        tick.schedule(money,0, 1);
     }
 
     /* Funktionen die wir brauchen */
