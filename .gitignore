@@ -88,3 +88,15 @@ nb-configuration.xml
 !src/**/build/
 
 
+build/tmp/compileJava/previous-compilation-data.bin
+build/libs/Team_Garbage-Can-1.0-SNAPSHOT.jar
+build/classes/java/main/at/acfhcampus/stud/team_garbagecan/Main.class
+build/classes/java/main/at/acfhcampus/stud/team_garbagecan/Main$1.class
+.idea/modules.xml
+.gradle/checksums/checksums.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/7.1.1/fileHashes/fileHashes.lock
+.gradle/7.1.1/fileHashes/fileHashes.bin
+.gradle/7.1.1/executionHistory/executionHistory.lock
+.gradle/7.1.1/executionHistory/executionHistory.bin
+.gradle/7.1.1/dependencies-accessors/dependencies-accessors.lock
