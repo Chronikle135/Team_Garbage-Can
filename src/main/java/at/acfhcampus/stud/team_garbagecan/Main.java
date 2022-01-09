@@ -4,6 +4,13 @@ import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllabfuhr;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllverbrennung;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Upgrades;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.ÖffentlicheMülltonne;
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllcontainer;
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Mülltrennung;
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Freiwillige_Helfer;
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Trashforce;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Mülllaster;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Müllmagnet;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Müllangel;
 import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Müllspieß;
 import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Upgrade2;
 import javafx.application.Application;
@@ -53,10 +60,18 @@ public class Main extends Application {
 
     public void start(Stage stage) throws IOException {
         /* Objekte und Upggrades die wir brauchen */
-        Müllverbrennung müllverbrennung = new Müllverbrennung();                       //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
-        Müllabfuhr müllabfuhr = new Müllabfuhr();
+        Müllverbrennung müllverbrennung = new Müllverbrennung();     //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
+        Müllcontainer müllcontainer = new Müllcontainer();
         ÖffentlicheMülltonne öffentlicheMülltonne = new ÖffentlicheMülltonne();
+        Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
+        Müllabfuhr müllabfuhr = new Müllabfuhr();
+        Trashforce trashforce = new Trashforce();
+        Mülltrennung mülltrennung = new Mülltrennung();
         Müllspieß müllspieß = new Müllspieß();
+        Mülllaster mülllaster = new Mülllaster();
+        Müllmagnet müllmagnet = new Müllmagnet();
+        Müllangel müllangel = new Müllangel();
+
 
         /* GUI Initialisierungen */
         Image icon = new Image("/at/acfhcampus/stud/team_garbagecan/garbage-can.png");
