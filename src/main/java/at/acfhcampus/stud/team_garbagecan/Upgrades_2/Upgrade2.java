@@ -28,15 +28,11 @@ public abstract class Upgrade2 {
         shopItem2 = new ShopItem2(new Image(url), this);                     //Pfad des Icons eines Upgrades
     }
 
-    /* Funktionen der Upgrades */
-    public BigInteger calcincome() {
-        return BigInteger.valueOf((long) clickpower * amount);                           //Berechnung des Incomes fÃ¼r ein Upgrade als funktion. Wie viel ein Upgrade pro tick gibt mal der Anzahl des Upgrades
-    }
 
     public void buy() {
         amount++;                                                                   //ErhÃ¶ht das Amount eines Upgrades wenn man es kauft
         setCash(getCash().subtract(BigInteger.valueOf(cost)));                      //Zieht die Kosten eines Upgrades nach dem Kaufen von der WÃ¤hrung die man hat ab
-        cost = (int) (cost + Math.exp(amount * 0.5));                               //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nÃ¤chsten Kosten des Upgradekaufes
+        cost = (int) (cost + Math.exp(amount * 0.5));                                //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nÃ¤chsten Kosten des Upgradekaufes
         shopItem2.incAmount();                                                       //Ã„ndert die Anzahl eines Upgrades die angezeigt wird auf den korrekten Wert nach dem Kaufen
         shopItem2.setPrice(cost);                                                    //Ã„ndert die Kosten eines Upgrades die angezeigt werden auf den korrekten Wert nach dem Kaufen
     }

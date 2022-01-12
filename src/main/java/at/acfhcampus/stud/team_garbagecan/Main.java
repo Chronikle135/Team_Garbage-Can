@@ -1,18 +1,7 @@
 package at.acfhcampus.stud.team_garbagecan;
 
-import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllabfuhr;
-import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllverbrennung;
-import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Upgrades;
-import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.ÖffentlicheMülltonne;
-import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Müllcontainer;
-import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Mülltrennung;
-import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Freiwillige_Helfer;
-import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.Trashforce;
-import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Mülllaster;
-import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Müllmagnet;
-import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Müllangel;
-import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Müllspieß;
-import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Upgrade2;
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.*;
+import at.acfhcampus.stud.team_garbagecan.Upgrades_2.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,13 +17,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static at.acfhcampus.stud.team_garbagecan.Main.getCash;
 
 public class Main extends Application {
     /* Globale Variablen */
@@ -44,8 +30,11 @@ public class Main extends Application {
     private final int HEIGHT = 700;
     int clickingPower = 1;
     int changeTo;
+    static int sumOfIncome;
+    int time;
+    BigInteger cashTrace = new BigInteger("0");
 
-
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* GUI Elemente */
     private HBox containerHBox = new HBox();
     private VBox rigthSideBoxTop = new VBox();
@@ -55,11 +44,20 @@ public class Main extends Application {
     private VBox finalcontainer = new VBox();
     private HBox banner = new HBox();
     private HBox footer = new HBox();
+    private HBox pause1 = new HBox();
+    private HBox pause2 = new HBox();
+    private HBox pause3 = new HBox();
+    private HBox pause4 = new HBox();
+    private HBox containerPauseBox = new HBox();
     ImageView store;
     Button canButton = new Button();
-
-
-    public void start(Stage stage) throws IOException {
+    Button pauseButton = new Button();
+    Stage Fenster;
+    Scene mainScene = new Scene(finalcontainer, WIDTH, HEIGHT);
+    Scene pauseScene = new Scene(containerPauseBox);
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    @Override
+    public void start(Stage primaryStage) throws IOException {
         /* Objekte und Upggrades die wir brauchen */
         Müllverbrennung müllverbrennung = new Müllverbrennung();     //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
         Müllcontainer müllcontainer = new Müllcontainer();
@@ -73,13 +71,13 @@ public class Main extends Application {
         Müllmagnet müllmagnet = new Müllmagnet();
         Müllangel müllangel = new Müllangel();
 
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* GUI Initialisierungen */
         Image icon = new Image("/at/acfhcampus/stud/team_garbagecan/garbage-can.png");
         Text text = new Text();
         Text garbage = new Text();
 
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Texte und ihre Eigenschaften */
         text.setText("GARBAGE-CLICKER");
         text.setX(50);
@@ -89,9 +87,9 @@ public class Main extends Application {
         garbage.setFill(Color.WHITE);
         garbage.setTextAlignment(TextAlignment.CENTER);
 
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Trashcanbutton */
-                                                      //Erstellen eines neuen Buttons
+        //Erstellen eines neuen Buttons
         canButton.setMinWidth(icon.getWidth() / 2);                                   //Höhe und Breite Variabel machen
         canButton.setMinHeight(icon.getHeight() / 2);                                 //Optische hexereien um dem ganzen ein Icon zuzuweisen und den Hintergrund auszublenden
         canButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/garbage-can.png);" +
@@ -100,15 +98,15 @@ public class Main extends Application {
         canButton.setOnMouseClicked(e -> clicki());                                   //Klickevent beim drücken des Buttons
 
 
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Boxensystem */
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Banner */
 
         banner.setMinWidth(WIDTH);
         banner.setMinHeight(100);
         banner.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/bannerNew.png);");
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         /* Mittlere Box */
         middleBox.setSpacing(30);
@@ -116,7 +114,7 @@ public class Main extends Application {
         middleBox.setMinWidth(300);
         middleBox.setPadding(new Insets(20, 10, 20, 10));
         middleBox.getChildren().addAll(garbage, canButton);
-        middleBox.setMinHeight(HEIGHT-100);
+        middleBox.setMinHeight(HEIGHT - 100);
         middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middlebox.png);");
 
 
@@ -125,67 +123,72 @@ public class Main extends Application {
                 "-fx-border-style: solid none solid solid;" +
                 "-fx-border-width: 5;"
          */
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Linke Box */
         leftSideBox.setMinWidth(200);
-        leftSideBox.setMinHeight(HEIGHT-100);
+        leftSideBox.setMinHeight(HEIGHT - 100);
         leftSideBox.setPadding(new Insets(4, 5, 5, 5));
         leftSideBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sidebox.png);");
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Rechte/Shop Box Top */
         rigthSideBoxTop.setMinWidth(200);
-        rigthSideBoxTop.setMinHeight((HEIGHT/2)-100);
+        rigthSideBoxTop.setMinHeight((HEIGHT / 2) - 100);
         rigthSideBoxTop.setPadding(new Insets(4, 5, 5, 5));
         rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sidebox.png);");
         //store = new ImageView("url(/at/acfhcampus/stud/team_garbagecan/store.jpg)");
         for (Upgrades u : Upgrades.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             rigthSideBoxTop.getChildren().add(u.getShopItem());
         }
-
-
-
-
-        /* Rechte/Shop Box Bottom */
-        rigthSideBoxBottom.setMinWidth(200);
-        rigthSideBoxBottom.setMinHeight((HEIGHT/2)-100);
-
-        rigthSideBoxBottom.setStyle("-fx-border-color: white;" +
-                "-fx-border-style: solid;" +
-                "-fx-border-width: 5;");
         for (Upgrade2 u : Upgrade2.upgradeList2) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             leftSideBox.getChildren().add(u.getShopItem2());
         }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        pauseButton.setMinWidth(50);
+        pauseButton.setMinHeight(50);
+        pauseButton.setOnMouseClicked(f -> primaryStage.setScene(pauseScene));
+        footer.setMinHeight(100);
+        footer.setMinWidth(100);
+        footer.getChildren().addAll(pauseButton);
+        footer.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
 
-
+//----------------------v-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Box in der die mittlere, rechte und linke Box sind */
         containerHBox.setMaxHeight(HEIGHT);
         containerHBox.getChildren().addAll(banner, leftSideBox, middleBox, rigthSideBoxTop, rigthSideBoxBottom);
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Fertige Box in der alle anderen drinnen sind */
         finalcontainer.getChildren().addAll(banner, containerHBox, footer);
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        /*Pausescreen Container mit den einzelnen Boxen die als Menüpunkte dienen*/
+        containerPauseBox.getChildren().addAll(pause1, pause2, pause3, pause4);
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Einblenden einer Hintergrundfarbe für die 3 zentralen Boxen zum Bugtesten */
         /*trashCanBox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
         shopBox.setBackground(new Background(new BackgroundFill(Color.MAGENTA, CornerRadii.EMPTY, Insets.EMPTY)));
         leftSideBox.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));*/
 
-        /* Erstellen und Eigenschafte der Szene */
-        Scene mainScene = new Scene(finalcontainer, WIDTH, HEIGHT);
-        stage.getIcons().add(icon);
-        stage.setResizable(false);
-        stage.setTitle("Garbage-Clicker");
-        stage.setScene(mainScene);
-        stage.show();
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        /* Erstellen und Eigenschafte der Szene */
+        primaryStage.getIcons().add(icon);
+        primaryStage.setResizable(false);
+        primaryStage.setTitle("Garbage-Clicker");
+        primaryStage.setScene(mainScene);
+        primaryStage.show();
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         /* Timer und seine Funktionen */
         Timer tick = new Timer();                                                         //Erstellen eines neuen Timers
         TimerTask getting = new TimerTask() {                                             //Erstellen einer TimerTasks, also einer Aufgabe die mit dem Tick eines Timers ausgeführt wird
             @Override
             public void run() {
+                time++;
                 for (Upgrades u : Upgrades.upgradeList) {                                 //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
                     cash = cash.add(u.calcincome());
+                    cashTrace = cashTrace.add(u.calcincome());
                     u.getShopItem().setVisible(visibility(u));                            //Überprüfung der Sichtbarkeit jedes Upgrades
                 }
                 for (Upgrade2 u : Upgrade2.upgradeList2) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
@@ -200,13 +203,14 @@ public class Main extends Application {
             }
         };
         tick.schedule(getting, 0, TICKRATE);                                        //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
-        tick.schedule(money,0, 1);
+        tick.schedule(money, 0, 1);
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* Funktionen die wir brauchen */
     private void clicki() {                                                             //Klickevent dass bei jedem Klick passiert
-        for (Upgrade2 u: Upgrade2.upgradeList2) {
-            changeTo += (u.getClickpower()*u.getAmount());
+        for (Upgrade2 u : Upgrade2.upgradeList2) {
+            changeTo += (u.getClickpower() * u.getAmount());
         }
 
         Timer timer = new Timer();
@@ -224,34 +228,41 @@ public class Main extends Application {
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
 
-        clickingPower = changeTo+1;
+        clickingPower = changeTo + 1;
         changeTo = 0;
         cash = cash.add(BigInteger.valueOf(clickingPower));                             //clickingPower gibt an wie viel Währung man pro Klick bekommt
+        cashTrace = cashTrace.add(BigInteger.valueOf(clickingPower));
     }
-
-    public void setClickingPower(int clickingPower) {
-        this.clickingPower = clickingPower;
-    }
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static BigInteger getCash() {                                                //Getter damit wir uns die Cashvariabel von überall holen können und sie trotzdem noch protected ist
         return cash;
     }
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public static boolean visibility(Upgrades irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
         if (irgendwas.getShopItem().isVisible()) return true;
         else return irgendwas.cost <= getCash().doubleValue();
     }
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static boolean visibility2(Upgrade2 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
         if (irgendwas.getShopItem2().isVisible()) return true;
         else return irgendwas.cost <= getCash().doubleValue();
     }
-
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static int perSecond() {
+        for (Upgrades u : Upgrades.upgradeList) {
+            sumOfIncome += u.income;
+        }
+        return sumOfIncome;
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void setCash(BigInteger cash) {                                       //Setter für unsere Währung
         Main.cash = cash;
     }
-
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* Main die unser Programm startet */
     public static void main(String[] args) {
         launch(args);
     }
-}
+}//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
