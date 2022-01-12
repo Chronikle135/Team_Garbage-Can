@@ -56,6 +56,7 @@ public class Main extends Application {
     private HBox banner = new HBox();
     private HBox footer = new HBox();
     ImageView store;
+    Button canButton = new Button();
 
 
     public void start(Stage stage) throws IOException {
@@ -90,7 +91,7 @@ public class Main extends Application {
 
 
         /* Trashcanbutton */
-        Button canButton = new Button();                                              //Erstellen eines neuen Buttons
+                                                      //Erstellen eines neuen Buttons
         canButton.setMinWidth(icon.getWidth() / 2);                                   //Höhe und Breite Variabel machen
         canButton.setMinHeight(icon.getHeight() / 2);                                 //Optische hexereien um dem ganzen ein Icon zuzuweisen und den Hintergrund auszublenden
         canButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/garbage-can.png);" +
@@ -106,7 +107,7 @@ public class Main extends Application {
 
         banner.setMinWidth(WIDTH);
         banner.setMinHeight(100);
-        banner.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/banner.jpg);");
+        banner.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/bannerNew.png);");
 
 
         /* Mittlere Box */
@@ -116,27 +117,26 @@ public class Main extends Application {
         middleBox.setPadding(new Insets(20, 10, 20, 10));
         middleBox.getChildren().addAll(garbage, canButton);
         middleBox.setMinHeight(HEIGHT-100);
-        middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/metalldark.jpg);" +
-                "-fx-border-color: black;" +
-                "-fx-border-style: solid;" +
-                "-fx-border-width: 5;");
+        middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middlebox.png);");
+
+
+        /*
+                -fx-border-left: black;" +
+                "-fx-border-style: solid none solid solid;" +
+                "-fx-border-width: 5;"
+         */
 
         /* Linke Box */
         leftSideBox.setMinWidth(200);
         leftSideBox.setMinHeight(HEIGHT-100);
-        leftSideBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/metall.jpg);" +
-                "-fx-border-left: black;" +
-                "-fx-border-style: solid none solid solid;" +
-                "-fx-border-width: 5;");
+        leftSideBox.setPadding(new Insets(4, 5, 5, 5));
+        leftSideBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sidebox.png);");
 
         /* Rechte/Shop Box Top */
         rigthSideBoxTop.setMinWidth(200);
         rigthSideBoxTop.setMinHeight((HEIGHT/2)-100);
-        rigthSideBoxTop.setPadding(new Insets(5, 5, 20, 0));
-        rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/metall.jpg);" +
-                "-fx-border-color: black;" +
-                "-fx-border-style: solid solid solid none;" +
-                "-fx-border-width: 5;");
+        rigthSideBoxTop.setPadding(new Insets(4, 5, 5, 5));
+        rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sidebox.png);");
         //store = new ImageView("url(/at/acfhcampus/stud/team_garbagecan/store.jpg)");
         for (Upgrades u : Upgrades.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             rigthSideBoxTop.getChildren().add(u.getShopItem());
@@ -208,6 +208,22 @@ public class Main extends Application {
         for (Upgrade2 u: Upgrade2.upgradeList2) {
             changeTo += (u.getClickpower()*u.getAmount());
         }
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                canButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/garbage-can.png);" +
+                        "-fx-background-size: 100%;" +
+                        "-fx-background-color: transparent;");
+            }
+        }, 200);//wait 1000ms before doing the action
+
+        canButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/garbage-can_small_plusEins.png);" +
+                "-fx-background-size: 100%;" +
+                "-fx-background-color: transparent;");
+
         clickingPower = changeTo+1;
         changeTo = 0;
         cash = cash.add(BigInteger.valueOf(clickingPower));                             //clickingPower gibt an wie viel Währung man pro Klick bekommt

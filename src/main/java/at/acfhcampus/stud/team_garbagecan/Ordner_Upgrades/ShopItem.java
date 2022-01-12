@@ -30,11 +30,8 @@ public class ShopItem {
         shopElements = new HBox();                                                                  //Erstellen der Box in der alle Elemente des Upgrades drinnen sind
         shopElements.setMinHeight(80);
         shopElements.setMinWidth(100);
-        shopElements.setPadding(new Insets(5, 5, 5, 5));
-        shopElements.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/metall2dark.jpg);" +
-                "-fx-border-color: black;" +
-                "-fx-border-width: 3;" +
-                "-fx-align: center");
+        shopElements.setPadding(new Insets(5, 5, 5, 10));
+        shopElements.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/shopitem.png);");
 
         buy = new Button();                                                                         //Button zum kaufen des Upgrades
         buy.setOnMouseClicked(e -> upgrades.checkIfMoney());                                        //Klickevent checkt zuerst ob man genug Geld hat, wenn ja wird es gekauft, wenn nein dann gibt es eine Fehlermeldung
