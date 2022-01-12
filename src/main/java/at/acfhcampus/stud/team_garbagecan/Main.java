@@ -70,6 +70,9 @@ public class Main extends Application {
         Mülllaster mülllaster = new Mülllaster();
         Müllmagnet müllmagnet = new Müllmagnet();
         Müllangel müllangel = new Müllangel();
+        Mülltüte  mülltüte = new Mülltüte();
+        Mülleimer mülleimer= new Mülleimer();
+        Müllschiff müllschiff= new Müllschiff();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* GUI Initialisierungen */
