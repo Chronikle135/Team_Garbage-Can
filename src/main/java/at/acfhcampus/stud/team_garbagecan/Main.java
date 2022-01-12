@@ -65,13 +65,21 @@ public class Main extends Application {
         Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
         Müllabfuhr müllabfuhr = new Müllabfuhr();
         Trashforce trashforce = new Trashforce();
+        Restmüll   restmüll =  new Restmüll();
+        Papiermüll papiermüll = new Papiermüll();
+        Wertstoffhof wertstoffhof=new Wertstoffhof();
         Mülltrennung mülltrennung = new Mülltrennung();
+        Glasmüll     glasmüll= new Glasmüll();
         Müllspieß müllspieß = new Müllspieß();
         Mülllaster mülllaster = new Mülllaster();
         Müllmagnet müllmagnet = new Müllmagnet();
         Müllangel müllangel = new Müllangel();
+        Recycling recycling = new Recycling();
         Mülltüte  mülltüte = new Mülltüte();
+        Müllsack  müllsack = new Müllsack();
         Mülleimer mülleimer= new Mülleimer();
+        Bioabfall bioabfall= new Bioabfall();
+        Sondermüll sondermüll= new Sondermüll();
         Müllschiff müllschiff= new Müllschiff();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
