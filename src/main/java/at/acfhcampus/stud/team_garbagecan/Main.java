@@ -3,16 +3,10 @@ package at.acfhcampus.stud.team_garbagecan;
 import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.*;
 import at.acfhcampus.stud.team_garbagecan.Upgrades_2.*;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -23,8 +17,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -54,17 +47,19 @@ public class Main extends Application {
     private HBox pause1 = new HBox();
     private HBox pause2 = new HBox();
     private HBox pause3 = new HBox();
-    private HBox pause4 = new HBox();
     private HBox containerPauseBox = new HBox();
     ImageView store;
     Button canButton = new Button();
     Button pauseButton = new Button();
-    Stage Fenster;
+    Button continueButton = new Button();
+    Button saveButton = new Button();
+    Button loadButton = new Button();
     Scene mainScene = new Scene(finalcontainer, WIDTH, HEIGHT);
     Scene pauseScene = new Scene(containerPauseBox);
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         /* Objekte und Upggrades die wir brauchen */
         Müllverbrennung müllverbrennung = new Müllverbrennung();     //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
         Müllcontainer müllcontainer = new Müllcontainer();
@@ -206,7 +201,48 @@ public class Main extends Application {
         finalcontainer.getChildren().addAll(banner, containerHBox, footer);
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /*Pausescreen Container mit den einzelnen Boxen die als Menüpunkte dienen*/
-        containerPauseBox.getChildren().addAll(pause1, pause2, pause3, pause4);
+        containerPauseBox.getChildren().addAll(pause1, pause2, pause3);
+        containerPauseBox.setMinWidth(600);
+        containerPauseBox.setMinHeight(800);
+        containerPauseBox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        pause1.setMinHeight(50);
+        pause1.setMinWidth(200);
+        pause1.getChildren().addAll(continueButton);
+        pause1.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+        pause2.setMinHeight(50);
+        pause2.setMinWidth(200);
+        pause2.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+        pause2.getChildren().addAll(saveButton);
+        pause3.setMinHeight(50);
+        pause3.setMinWidth(200);
+        pause3.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        pause3.getChildren().addAll(loadButton);
+        continueButton.setMinWidth(200);
+        continueButton.setMinHeight(50);
+        continueButton.setOnMouseClicked(f -> primaryStage.setScene(mainScene));
+        continueButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pause.png);");
+        saveButton.setMinWidth(200);
+        saveButton.setMinHeight(50);
+        saveButton.setOnMouseClicked(f -> {
+            try {
+                saveGame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        saveButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pause.png);");
+        loadButton.setMinWidth(200);
+        loadButton.setMinHeight(50);
+        loadButton.setOnMouseClicked(f -> {
+            try {
+                loadGame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+        loadButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pause.png);");
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Einblenden einer Hintergrundfarbe für die 3 zentralen Boxen zum Bugtesten */
         /*trashCanBox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -305,6 +341,27 @@ public class Main extends Application {
     public static void setCash(BigInteger cash) {                                       //Setter für unsere Währung
         Main.cash = cash;
     }
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    /*Save Game */
+    public static void saveGame() throws IOException {
+        FileOutputStream fos = new FileOutputStream("C:\\Users\\Chronikle\\IdeaProjects\\Team_Garbage-Can\\src\\main\\resources\\at\\acfhcampus\\stud\\team_garbagecan\\saveGame.txt");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        for (Upgrades u :Upgrades.upgradeList) {
+            oos.writeObject(u/*.amount*/);
+/*            oos.writeObject(u.cost);*/
+        }
+        for (Upgrade2 u :Upgrade2.upgradeList2) {
+            oos.writeObject(u/*.amount*/);
+/*            oos.writeObject(u.cost);*/
+        }
+        oos.close();
+    }
+    public static void loadGame() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("C:\\Users\\Chronikle\\IdeaProjects\\Team_Garbage-Can\\src\\main\\resources\\at\\acfhcampus\\stud\\team_garbagecan\\saveGame.txt");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        ois.readObject();
+    }
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* Main die unser Programm startet */
     public static void main(String[] args) {

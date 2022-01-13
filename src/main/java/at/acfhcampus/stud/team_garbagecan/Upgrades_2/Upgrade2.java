@@ -4,13 +4,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import static at.acfhcampus.stud.team_garbagecan.Main.getCash;
 import static at.acfhcampus.stud.team_garbagecan.Main.setCash;
 
-public abstract class Upgrade2 {
+public abstract class Upgrade2{
     /* Variablen eins Upgrades */
     public int clickpower;                                                          //Ein Upgrade muss also haben: clickpower
     public String name;                                                             //Einen Namen
