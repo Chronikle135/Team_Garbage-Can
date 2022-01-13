@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 import static at.acfhcampus.stud.team_garbagecan.Main.getCash;
 import static at.acfhcampus.stud.team_garbagecan.Main.setCash;
 
-public abstract class Upgrades {                                                    //neue abstrakte Klasse die als Blueprint für alle Upgrades dient.
+public abstract class Upgrades{                                                    //neue abstrakte Klasse die als Blueprint für alle Upgrades dient.
     /* Variablen eins Upgrades */
     public int income;                                                              //Ein Upgrade muss also haben: income (wie viel Geld pro Zeiteinheit
     public String name;                                                             //Einen Namen
