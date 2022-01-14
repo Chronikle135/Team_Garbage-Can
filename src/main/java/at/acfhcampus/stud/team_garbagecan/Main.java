@@ -4,9 +4,12 @@ import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.*;
 import at.acfhcampus.stud.team_garbagecan.Upgrades_2.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -17,6 +20,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.math.BigInteger;
 import java.util.Timer;
@@ -139,22 +144,6 @@ public class Main extends Application {
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Linke Box */
 
-        // Scrollbar
-/*
-        ScrollBar scroll = new ScrollBar();
-        scroll.setMin(0);
-        scroll.setOrientation(Orientation.VERTICAL);
-        scroll.setMinHeight(590);
-        scroll.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                leftSideBox.setLayoutY(-newValue.doubleValue());
-            }
-        });
-        leftSideBox.getChildren().addAll(scroll);
-
-
- */
 
         leftSideBox.setMinWidth(200);
         leftSideBox.setMinHeight(HEIGHT - 150);
@@ -165,8 +154,11 @@ public class Main extends Application {
         }
 
 
+
+
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        /* Rechte/Shop Box Top */
+        /* Rechte/Shop Box */
         rigthSideBoxTop.setMinWidth(200);
         rigthSideBoxTop.setMinHeight(HEIGHT - 150);
         rigthSideBoxTop.setPadding(new Insets(4, 5, 4, 5));
@@ -199,30 +191,38 @@ public class Main extends Application {
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Fertige Box in der alle anderen drinnen sind */
         finalcontainer.getChildren().addAll(banner, containerHBox, footer);
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /*Pausescreen Container mit den einzelnen Boxen die als Menüpunkte dienen*/
         containerPauseBox.getChildren().addAll(pause1, pause2, pause3);
-        containerPauseBox.setMinWidth(600);
-        containerPauseBox.setMinHeight(800);
-        containerPauseBox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        containerPauseBox.setMinWidth(700);
+        containerPauseBox.setMinHeight(700);
+
+        containerPauseBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pauseBackground.png);");
+        // Continue Button
         pause1.setMinHeight(50);
         pause1.setMinWidth(200);
+        pause1.setAlignment(Pos.CENTER);
         pause1.getChildren().addAll(continueButton);
-        pause1.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-        pause2.setMinHeight(50);
-        pause2.setMinWidth(200);
-        pause2.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-        pause2.getChildren().addAll(saveButton);
-        pause3.setMinHeight(50);
-        pause3.setMinWidth(200);
-        pause3.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-        pause3.getChildren().addAll(loadButton);
-        continueButton.setMinWidth(200);
+
+        continueButton.setMinWidth(100);
         continueButton.setMinHeight(50);
+        continueButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/continue.png);" +
+                "-fx-background-size: 100%;" +
+                "-fx-background-color: transparent;");
         continueButton.setOnMouseClicked(f -> primaryStage.setScene(mainScene));
-        continueButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pause.png);");
-        saveButton.setMinWidth(200);
+
+        // Save Button
+        pause2.setMinHeight(50);
+        pause2.setMinWidth(300);
+        pause2.setAlignment(Pos.CENTER);
+        pause2.getChildren().addAll(saveButton);
+
+        saveButton.setMinWidth(100);
         saveButton.setMinHeight(50);
+        saveButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/save.png);" +
+                "-fx-background-size: 100%;" +
+                "-fx-background-color: transparent;");
         saveButton.setOnMouseClicked(f -> {
             try {
                 saveGame();
@@ -230,9 +230,18 @@ public class Main extends Application {
                 e.printStackTrace();
             }
         });
-        saveButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pause.png);");
-        loadButton.setMinWidth(200);
+
+        //Load Button
+        pause3.setMinHeight(50);
+        pause3.setMinWidth(200);
+        pause3.setAlignment(Pos.CENTER);
+        pause3.getChildren().addAll(loadButton);
+
+        loadButton.setMinWidth(100);
         loadButton.setMinHeight(50);
+        loadButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/load.png);" +
+                "-fx-background-size: 100%;" +
+                "-fx-background-color: transparent;");
         loadButton.setOnMouseClicked(f -> {
             try {
                 loadGame();
@@ -242,7 +251,6 @@ public class Main extends Application {
                 e.printStackTrace();
             }
         });
-        loadButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pause.png);");
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Einblenden einer Hintergrundfarbe für die 3 zentralen Boxen zum Bugtesten */
         /*trashCanBox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
