@@ -72,21 +72,21 @@ public class Main extends Application {
         Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
         Müllabfuhr müllabfuhr = new Müllabfuhr();
         Trashforce trashforce = new Trashforce();
-        Restmüll   restmüll =  new Restmüll();
-        Papiermüll papiermüll = new Papiermüll();
-        Wertstoffhof wertstoffhof=new Wertstoffhof();
+        //Restmüll   restmüll =  new Restmüll();
+        //Papiermüll papiermüll = new Papiermüll();
+        //Wertstoffhof wertstoffhof=new Wertstoffhof();
         Mülltrennung mülltrennung = new Mülltrennung();
-        Glasmüll     glasmüll= new Glasmüll();
+        //Glasmüll     glasmüll= new Glasmüll();
         Müllspieß müllspieß = new Müllspieß();
         Mülllaster mülllaster = new Mülllaster();
         Müllmagnet müllmagnet = new Müllmagnet();
         Müllangel müllangel = new Müllangel();
-        Recycling recycling = new Recycling();
+        //Recycling recycling = new Recycling();
         Mülltüte  mülltüte = new Mülltüte();
-        Müllsack  müllsack = new Müllsack();
+        //Müllsack  müllsack = new Müllsack();
         Mülleimer mülleimer= new Mülleimer();
-        Bioabfall bioabfall= new Bioabfall();
-        Sondermüll sondermüll= new Sondermüll();
+        //Bioabfall bioabfall= new Bioabfall();
+        //Sondermüll sondermüll= new Sondermüll();
         Müllschiff müllschiff= new Müllschiff();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -293,6 +293,10 @@ public class Main extends Application {
         };
         tick.schedule(getting, 0, TICKRATE);                                        //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
         tick.schedule(money, 0, 1);
+
+
+        // Close Game
+
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
