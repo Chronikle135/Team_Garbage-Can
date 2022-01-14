@@ -43,7 +43,7 @@ public abstract class Upgrade2{
             buy();                                                                  //checkt ob wir genug WÃ¤hrung haben um uns ein Upgrade zu kaufen, wenn ja wird es gekauft
         }
         else {
-            System.out.println("WE DON´T HAVE THE CAPACITIES");                    //Wenn wir nicht genug WÃ¤hrung haben wird eine Fehlermeldung aufgefÃ¼hrt.
+            //System.out.println("WE DON´T HAVE THE CAPACITIES");                    //Wenn wir nicht genug WÃ¤hrung haben wird eine Fehlermeldung aufgefÃ¼hrt.
 
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setContentText("WE DON´T HAVE THE CAPACITIES");           // Anzeige der Fehlermeldung
