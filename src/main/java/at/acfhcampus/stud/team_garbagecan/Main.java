@@ -39,6 +39,8 @@ public class Main extends Application {
     int time;
     BigInteger cashTrace = new BigInteger("0");
 
+
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* GUI Elemente */
     private HBox containerHBox = new HBox();
@@ -94,6 +96,10 @@ public class Main extends Application {
         Image icon = new Image("/at/acfhcampus/stud/team_garbagecan/garbage-can.png");
         Text text = new Text();
         Text garbage = new Text();
+        Text klicksPerSec = new Text();
+        Text clickPower = new Text();
+        Text spielzeit = new Text();
+        Text müllGesammelt = new Text();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Texte und ihre Eigenschaften */
@@ -104,6 +110,21 @@ public class Main extends Application {
         garbage.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         garbage.setFill(Color.WHITE);
         garbage.setTextAlignment(TextAlignment.CENTER);
+
+        klicksPerSec.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        klicksPerSec.setFill(Color.AQUAMARINE);
+
+
+        clickPower.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        clickPower.setFill(Color.BEIGE);
+
+
+        spielzeit.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        spielzeit.setFill(Color.CORAL);
+
+        müllGesammelt.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        müllGesammelt.setFill(Color.BLUEVIOLET);
+
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Trashcanbutton */
@@ -131,7 +152,7 @@ public class Main extends Application {
         middleBox.setAlignment(Pos.CENTER);
         middleBox.setMinWidth(300);
         middleBox.setPadding(new Insets(20, 10, 20, 10));
-        middleBox.getChildren().addAll(garbage, canButton);
+        middleBox.getChildren().addAll(garbage, canButton, klicksPerSec, spielzeit, clickPower,müllGesammelt);
         middleBox.setMinHeight(HEIGHT - 150);
         middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middlebox.png);");
 
@@ -289,6 +310,12 @@ public class Main extends Application {
             @Override
             public void run() {
                 garbage.setText(String.format("Amount of Garbage %n%d", cash.longValue()));
+                spielzeit.setText("Time: " + time);
+                müllGesammelt.setText("Total Garbage: " + cashTrace);
+                clickPower.setText("Click Power: " + clickingPower);
+               // klicksPerSec.setText("Clicks/s: " + perSecond());
+
+
             }
         };
         tick.schedule(getting, 0, TICKRATE);                                        //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
