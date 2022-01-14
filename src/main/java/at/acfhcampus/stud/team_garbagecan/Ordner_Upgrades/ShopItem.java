@@ -40,16 +40,16 @@ public class ShopItem {
         buy.setGraphic(icon);
 
         this.name = new Text(upgrades.name + "");                                                   //Erstellen der Textfelder für den Namen, Preis und Anzahl des Upgrades
-        this.name.setFont(Font.font("Arial Bold", FontWeight.BOLD,10));
-        this.name.setFill(Color.WHITE);
+        this.name.setFont(Font.font("Arial Bold", FontWeight.BOLD,13));
+        this.name.setFill(Color.BLACK);
 
         this.price = new Text(String.format("Price: %d", upgrades.cost));
         this.price.setFont(Font.font("Arial Bold", FontWeight.BOLD, 10));
-        this.price.setFill(Color.WHITE);
+        this.price.setFill(Color.BLACK);
 
         this.amount = new Text(String.format("Amount: %d", upgrades.amount));
         this.amount.setFont(Font.font("Arial Bold", FontWeight.BOLD,10));
-        this.amount.setFill(Color.WHITE);
+        this.amount.setFill(Color.BLACK);
 
         this.zwischenContainer = new VBox();                                                        //Neue Box in der dann alle Eigenschaften des Upgrades sind zum besseren Handhaben
         zwischenContainer.getChildren().addAll(name, price, amount);                                //Aufnehmen der Eigenschaften in dem Zwischencontainer
