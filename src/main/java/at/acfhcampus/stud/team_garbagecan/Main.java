@@ -27,7 +27,7 @@ import java.math.BigInteger;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Main extends Application {
+public class Main extends Application implements Serializable {
     /* Globale Variablen */
     private static BigInteger cash = new BigInteger("0");
     final private int TICKRATE = 1000;
@@ -35,7 +35,6 @@ public class Main extends Application {
     private final int HEIGHT = 700;
     int clickingPower = 1;
     int changeTo;
-    static int sumOfIncome;
     int time;
     BigInteger cashTrace = new BigInteger("0");
 
@@ -68,28 +67,28 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         /* Objekte und Upggrades die wir brauchen */
-        Müllverbrennung müllverbrennung = new Müllverbrennung();     //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
-        Müllcontainer müllcontainer = new Müllcontainer();
-        ÖffentlicheMülltonne öffentlicheMülltonne = new ÖffentlicheMülltonne();
-        Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
-        Müllabfuhr müllabfuhr = new Müllabfuhr();
+        Muellschiff muellschiff= new Muellschiff();
+        Muelleimer muelleimer= new Muelleimer();
+        Muellverbrennung müllverbrennung = new Muellverbrennung();     //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
+        Muellcontainer müllcontainer = new Muellcontainer();
+        OeffentlicheMuelltonne OeffentlicheMuelltonne = new OeffentlicheMuelltonne();
+        Muellabfuhr muellabfuhr = new Muellabfuhr();
+        Restmuell   restmuell =  new Restmuell();
+        Papiermuell papiermuell = new Papiermuell();
+        Wertstoffhof wertstoffhof=new Wertstoffhof();
         Trashforce trashforce = new Trashforce();
-        //Restmüll   restmüll =  new Restmüll();
-        //Papiermüll papiermüll = new Papiermüll();
-        //Wertstoffhof wertstoffhof=new Wertstoffhof();
-        Mülltrennung mülltrennung = new Mülltrennung();
-        //Glasmüll     glasmüll= new Glasmüll();
-        Müllspieß müllspieß = new Müllspieß();
-        Mülllaster mülllaster = new Mülllaster();
-        Müllmagnet müllmagnet = new Müllmagnet();
-        Müllangel müllangel = new Müllangel();
-        //Recycling recycling = new Recycling();
-        Mülltüte  mülltüte = new Mülltüte();
-        //Müllsack  müllsack = new Müllsack();
-        Mülleimer mülleimer= new Mülleimer();
-        //Bioabfall bioabfall= new Bioabfall();
-        //Sondermüll sondermüll= new Sondermüll();
-        Müllschiff müllschiff= new Müllschiff();
+        //Muelltrennung muelltrennung = new Muelltrennung();
+        Glasmuell     glasmuell= new Glasmuell();
+        //Muelllaster muelllaster = new Muelllaster();
+        //Muellmagnet muellmagnet = new Muellmagnet();
+        Muellangel muellangel = new Muellangel();
+        Recycling recycling = new Recycling();
+        //Muelltuete  muelltuete = new Muelltuete();
+        //Muellsack  muellsack = new Muellsack();
+        Bioabfall bioabfall= new Bioabfall();
+        Sondermuell sondermuell= new Sondermuell();
+        Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
+        Muellspiess müllspiess = new Muellspiess();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* GUI Initialisierungen */
@@ -263,15 +262,15 @@ public class Main extends Application {
         loadButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/load.png);" +
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
-        loadButton.setOnMouseClicked(f -> {
+/*        loadButton.setOnMouseClicked(f -> {
             try {
-                loadGame();
+               *//* loadGame();*//*
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        });
+        });*/
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Einblenden einer Hintergrundfarbe für die 3 zentralen Boxen zum Bugtesten */
         /*trashCanBox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -313,7 +312,7 @@ public class Main extends Application {
                 spielzeit.setText("Time: " + time);
                 müllGesammelt.setText("Total Garbage: " + cashTrace);
                 clickPower.setText("Click Power: " + clickingPower);
-               // klicksPerSec.setText("Clicks/s: " + perSecond());
+                klicksPerSec.setText("Garbage/s: " + perSecond());
 
 
             }
@@ -360,46 +359,80 @@ public class Main extends Application {
     }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public static boolean visibility(Upgrades irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+    public static boolean visibility(Upgrades irgendwas) {                              //Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
         if (irgendwas.getShopItem().isVisible()) return true;
         else return irgendwas.cost <= getCash().doubleValue();
     }
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    public static boolean visibility2(Upgrade2 irgendwas) {//Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+    public static boolean visibility2(Upgrade2 irgendwas) {                             //Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
         if (irgendwas.getShopItem2().isVisible()) return true;
         else return irgendwas.cost <= getCash().doubleValue();
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static int perSecond() {
+        int sumOfIncome = 0;
         for (Upgrades u : Upgrades.upgradeList) {
-            sumOfIncome += u.income;
+            sumOfIncome += u.income*u.amount;
         }
         return sumOfIncome;
     }
+
+    public BigInteger getCashTrace() {
+        return cashTrace;
+    }
+
+    public void setCashTrace(BigInteger cashTrace) {
+        this.cashTrace = cashTrace;
+    }
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void setCash(BigInteger cash) {                                       //Setter für unsere Währung
         Main.cash = cash;
     }
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /*Save Game */
-    public static void saveGame() throws IOException {
+    public void saveGame() throws IOException {
         FileOutputStream fos = new FileOutputStream("C:\\Users\\Chronikle\\IdeaProjects\\Team_Garbage-Can\\src\\main\\resources\\at\\acfhcampus\\stud\\team_garbagecan\\saveGame.txt");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-        for (Upgrades u :Upgrades.upgradeList) {
-            oos.writeObject(u/*.amount*/);
-/*            oos.writeObject(u.cost);*/
+        for (Upgrades u : Upgrades.upgradeList) {
+            oos.writeObject(u.getCost());
+            oos.writeObject(u.getAmount());
         }
-        for (Upgrade2 u :Upgrade2.upgradeList2) {
-            oos.writeObject(u/*.amount*/);
-/*            oos.writeObject(u.cost);*/
+        for (Upgrade2 u : Upgrade2.upgradeList2) {
+            oos.writeObject(u.getCost());
+            oos.writeObject(u.getAmount());
         }
+        oos.writeUTF(String.valueOf(cash));
+        oos.writeUTF(String.valueOf(cashTrace));
+        oos.writeUTF(String.valueOf(time));
         oos.close();
     }
-    public static void loadGame() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("C:\\Users\\Chronikle\\IdeaProjects\\Team_Garbage-Can\\src\\main\\resources\\at\\acfhcampus\\stud\\team_garbagecan\\saveGame.txt");
+
+   /* public void loadGame() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("src/main/saveGame/saveGame.txt");
         ObjectInputStream ois = new ObjectInputStream(fis);
-        ois.readObject();
-    }
+        for (Upgrades u : Upgrades.upgradeList) {
+            u.setCost((Integer) ois.readObject());
+            int newAmount = (int) ois.readObject();
+            u.getRealShopItem().setAmount(new Text(String.format("Amount: %d", u.amount)));
+            u.setAmount(newAmount);
+            System.out.println(u.amount);
+        }
+        for (Upgrade2 u : Upgrade2.upgradeList2) {
+            u.setCost((Integer) ois.readObject());
+            int newAmount = (int) ois.readObject();
+            u.getRealShopItem().setAmount(newAmount);
+            u.setAmount(newAmount);
+            System.out.println(u.amount);
+        }
+        setCash(BigInteger.valueOf(Long.parseLong(ois.readUTF())));
+        setCashTrace(BigInteger.valueOf(Long.parseLong(ois.readUTF())));
+        time = Integer.parseInt(ois.readUTF());
+        ois.close();
+        System.out.println(cash.toString()+ cashTrace.toString() +time );
+    }*/
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* Main die unser Programm startet */

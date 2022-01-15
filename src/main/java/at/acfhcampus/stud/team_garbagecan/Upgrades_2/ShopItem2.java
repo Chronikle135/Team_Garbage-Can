@@ -82,8 +82,27 @@ public class ShopItem2{
             amount.setText(String.format("Amount: %d", Integer.parseInt(amount.getText().split(" ")[1]) + 1));
         }
 
-        public void setPrice(int newPrice) {                                                            //Funktion zur Anzeige des Preises eines Upgrades
+    public Text getPrice() {
+        return price;
+    }
+
+    public void setPrice(Text price) {
+        this.price = price;
+    }
+
+    public Text getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Text amount) {
+        this.amount = amount;
+    }
+
+    public void setPrice(int newPrice) {                                                            //Funktion zur Anzeige des Preises eines Upgrades
             price.setText(String.format("Price: %d", newPrice));
         }
+
+    public void setAmount(int newAmount) {
     }
+}
 

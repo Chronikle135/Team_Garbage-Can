@@ -1,5 +1,6 @@
 package at.acfhcampus.stud.team_garbagecan.Upgrades_2;
 
+import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.ShopItem;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -11,14 +12,14 @@ import java.util.List;
 import static at.acfhcampus.stud.team_garbagecan.Main.getCash;
 import static at.acfhcampus.stud.team_garbagecan.Main.setCash;
 
-public abstract class Upgrade2{
+public abstract class Upgrade2 implements Serializable{
     /* Variablen eins Upgrades */
     public int clickpower;                                                          //Ein Upgrade muss also haben: clickpower
     public String name;                                                             //Einen Namen
     public int amount;                                                              //Wie oft das Upgrade gekauft wurde
     public int cost;                                                                //Wie viel das Upgrade kostet
     public static List<Upgrade2> upgradeList2 = new ArrayList<>();                   //Erstellen einer Liste die bei der Erstellung eines neuen Upgrades dieses gleich in sich hinzufÃ¼gt
-    private ShopItem2 shopItem2;
+    transient private ShopItem2 shopItem2;
 
     public Upgrade2(int clickpower, int amount, int cost, String name, String url) {
         this.clickpower = clickpower;
@@ -36,6 +37,18 @@ public abstract class Upgrade2{
         cost = (int) (cost + Math.exp(amount * 0.5));                                //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nÃ¤chsten Kosten des Upgradekaufes
         shopItem2.incAmount();                                                       //Ã„ndert die Anzahl eines Upgrades die angezeigt wird auf den korrekten Wert nach dem Kaufen
         shopItem2.setPrice(cost);                                                    //Ã„ndert die Kosten eines Upgrades die angezeigt werden auf den korrekten Wert nach dem Kaufen
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public void checkIfMoney() {
@@ -60,7 +73,11 @@ public abstract class Upgrade2{
     public int getAmount() {
         return amount;
     }
-
+    public void setAmount(Object readObject) {
+    }
+    public ShopItem2 getRealShopItem() {                                                     //Getter für die einzelnen Shopitems
+        return shopItem2;
+    }
     public HBox getShopItem2() {                                                     //Getter fÃ¼r die einzelnen Shopitems
         return shopItem2.getShopElements();
     }

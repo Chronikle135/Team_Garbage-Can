@@ -12,20 +12,22 @@ import java.util.List;
 import static at.acfhcampus.stud.team_garbagecan.Main.getCash;
 import static at.acfhcampus.stud.team_garbagecan.Main.setCash;
 
-public abstract class Upgrades{                                                    //neue abstrakte Klasse die als Blueprint für alle Upgrades dient.
+public abstract class Upgrades implements Serializable {                                                    //neue abstrakte Klasse die als Blueprint für alle Upgrades dient.
     /* Variablen eins Upgrades */
     public int income;                                                              //Ein Upgrade muss also haben: income (wie viel Geld pro Zeiteinheit
     public String name;                                                             //Einen Namen
     public int amount;                                                              //Wie oft das Upgrade gekauft wurde
     public int cost;                                                                //Wie viel das Upgrade kostet
     public static List<Upgrades> upgradeList = new ArrayList<>();                  //Erstellen einer Liste die bei der Erstellung eines neuen Upgrades dieses gleich in sich hinzufügt
-    private ShopItem shopItem;
+    transient private ShopItem shopItem;
+    private static long serialVersionUID;
 
-    public Upgrades(int income, int amount, int cost, String name, String url) {    //Ganz normaler Konstruktor für die Upgrades
+    public Upgrades(int income, int amount, int cost, long serialVersionUID, String name, String url) {    //Ganz normaler Konstruktor für die Upgrades
         this.income = income;
         this.amount = amount;
         this.cost = cost;
         this.name = name;
+        this.serialVersionUID = serialVersionUID;
         upgradeList.add(this);                                                      //Fügt das erzeugte Upgrade in die erstellte Liste hinzu
         shopItem = new ShopItem(new Image(url), this);                     //Pfad des Icons eines Upgrades
     }
@@ -43,11 +45,26 @@ public abstract class Upgrades{                                                 
         shopItem.setPrice(cost);                                                    //Ändert die Kosten eines Upgrades die angezeigt werden auf den korrekten Wert nach dem Kaufen
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
     public void checkIfMoney() {
         if (getCash().longValue() >= cost) {
             buy();                                                                  //checkt ob wir genug Währung haben um uns ein Upgrade zu kaufen, wenn ja wird es gekauft
-            }
-        else {
+        } else {
             System.out.println("WE DON´T HAVE THE CAPACITIES");//Wenn wir nicht genug Währung haben wird eine Fehlermeldung aufgeführt.
 
             /*JFrame achtung = new JFrame();
@@ -68,15 +85,17 @@ public abstract class Upgrades{                                                 
             text.add(caution);*/
 
 
-
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setContentText("WE DON´T HAVE THE CAPACITIES");           // Anzeige der Fehlermeldung
             a.showAndWait();                                            // wartet darauf dass man ok drückt
             a.setAlertType(Alert.AlertType.ERROR);                      // macht das rote X
-            }
+        }
     }
 
     public HBox getShopItem() {                                                     //Getter für die einzelnen Shopitems
         return shopItem.getShopElements();
+    }
+    public ShopItem getRealShopItem() {                                                     //Getter für die einzelnen Shopitems
+        return shopItem;
     }
 }
