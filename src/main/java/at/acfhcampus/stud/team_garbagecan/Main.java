@@ -4,15 +4,13 @@ import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.*;
 import at.acfhcampus.stud.team_garbagecan.Upgrades_2.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -20,8 +18,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import java.math.BigInteger;
 import java.util.Timer;
@@ -37,7 +33,6 @@ public class Main extends Application implements Serializable {
     int changeTo;
     int time;
     BigInteger cashTrace = new BigInteger("0");
-
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -67,26 +62,26 @@ public class Main extends Application implements Serializable {
     @Override
     public void start(Stage primaryStage) {
         /* Objekte und Upggrades die wir brauchen */
-        Muellschiff muellschiff= new Muellschiff();
-        Muelleimer muelleimer= new Muelleimer();
+        Muellschiff muellschiff = new Muellschiff();
+        Muelleimer muelleimer = new Muelleimer();
         Muellverbrennung müllverbrennung = new Muellverbrennung();     //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
         Muellcontainer müllcontainer = new Muellcontainer();
         OeffentlicheMuelltonne OeffentlicheMuelltonne = new OeffentlicheMuelltonne();
         Muellabfuhr muellabfuhr = new Muellabfuhr();
-        Restmuell   restmuell =  new Restmuell();
+        Restmuell restmuell = new Restmuell();
         Papiermuell papiermuell = new Papiermuell();
-        Wertstoffhof wertstoffhof=new Wertstoffhof();
+        Wertstoffhof wertstoffhof = new Wertstoffhof();
         Trashforce trashforce = new Trashforce();
         //Muelltrennung muelltrennung = new Muelltrennung();
-        Glasmuell     glasmuell= new Glasmuell();
+        Glasmuell glasmuell = new Glasmuell();
         //Muelllaster muelllaster = new Muelllaster();
         //Muellmagnet muellmagnet = new Muellmagnet();
         Muellangel muellangel = new Muellangel();
         Recycling recycling = new Recycling();
         //Muelltuete  muelltuete = new Muelltuete();
         //Muellsack  muellsack = new Muellsack();
-        Bioabfall bioabfall= new Bioabfall();
-        Sondermuell sondermuell= new Sondermuell();
+        Bioabfall bioabfall = new Bioabfall();
+        Sondermuell sondermuell = new Sondermuell();
         Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
         Muellspiess müllspiess = new Muellspiess();
 
@@ -151,7 +146,7 @@ public class Main extends Application implements Serializable {
         middleBox.setAlignment(Pos.CENTER);
         middleBox.setMinWidth(300);
         middleBox.setPadding(new Insets(20, 10, 20, 10));
-        middleBox.getChildren().addAll(garbage, canButton, klicksPerSec, spielzeit, clickPower,müllGesammelt);
+        middleBox.getChildren().addAll(garbage, canButton, klicksPerSec, spielzeit, clickPower, müllGesammelt);
         middleBox.setMinHeight(HEIGHT - 150);
         middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middlebox.png);");
 
@@ -172,9 +167,6 @@ public class Main extends Application implements Serializable {
         for (Upgrade2 u : Upgrade2.upgradeList2) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             leftSideBox.getChildren().add(u.getShopItem2());
         }
-
-
-
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -262,15 +254,15 @@ public class Main extends Application implements Serializable {
         loadButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/load.png);" +
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
-/*        loadButton.setOnMouseClicked(f -> {
+        loadButton.setOnMouseClicked(f -> {
             try {
-               *//* loadGame();*//*
+                loadGame();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        });*/
+        });
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Einblenden einer Hintergrundfarbe für die 3 zentralen Boxen zum Bugtesten */
         /*trashCanBox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -369,11 +361,12 @@ public class Main extends Application implements Serializable {
         if (irgendwas.getShopItem2().isVisible()) return true;
         else return irgendwas.cost <= getCash().doubleValue();
     }
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static int perSecond() {
         int sumOfIncome = 0;
         for (Upgrades u : Upgrades.upgradeList) {
-            sumOfIncome += u.income*u.amount;
+            sumOfIncome += u.income * u.amount;
         }
         return sumOfIncome;
     }
@@ -394,7 +387,7 @@ public class Main extends Application implements Serializable {
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /*Save Game */
     public void saveGame() throws IOException {
-        FileOutputStream fos = new FileOutputStream("C:\\Users\\Chronikle\\IdeaProjects\\Team_Garbage-Can\\src\\main\\resources\\at\\acfhcampus\\stud\\team_garbagecan\\saveGame.txt");
+        FileOutputStream fos = new FileOutputStream("src/main/saveGame/saveGame.txt");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         for (Upgrades u : Upgrades.upgradeList) {
             oos.writeObject(u.getCost());
@@ -410,7 +403,7 @@ public class Main extends Application implements Serializable {
         oos.close();
     }
 
-   /* public void loadGame() throws IOException, ClassNotFoundException {
+    public void loadGame() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream("src/main/saveGame/saveGame.txt");
         ObjectInputStream ois = new ObjectInputStream(fis);
         for (Upgrades u : Upgrades.upgradeList) {
@@ -431,8 +424,8 @@ public class Main extends Application implements Serializable {
         setCashTrace(BigInteger.valueOf(Long.parseLong(ois.readUTF())));
         time = Integer.parseInt(ois.readUTF());
         ois.close();
-        System.out.println(cash.toString()+ cashTrace.toString() +time );
-    }*/
+        System.out.println(cash.toString() + cashTrace.toString() + time);
+    }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* Main die unser Programm startet */
