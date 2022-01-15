@@ -33,13 +33,13 @@ public class ShopItem {
 
     public ShopItem(Image image, Upgrades upgrades) {
         icon = new ImageView(image);                                                                //Icon das beim erstellen des Shopitems zugewiesen wird
-        icon.setFitHeight(10);                                                                      //Höhe und Breite des Icons
+        icon.setFitHeight(25);                                                                      //Höhe und Breite des Icons
         icon.setFitWidth(25);
         shopElements = new HBox();                                                                  //Erstellen der Box in der alle Elemente des Upgrades drinnen sind
-        shopElements.setMinHeight(50);
+        shopElements.setMinHeight(78);
         shopElements.setMinWidth(100);
-        shopElements.setPadding(new Insets(5, 5, 5, 10));
-        shopElements.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/shopitem.png);");
+        shopElements.setPadding(new Insets(14, 5, 5, 10));
+        shopElements.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/shopitemNew.png);");
 
         buy = new Button();                                                                         //Button zum kaufen des Upgrades
         buy.setOnMouseClicked(e -> upgrades.checkIfMoney());                                        //Klickevent checkt zuerst ob man genug Geld hat, wenn ja wird es gekauft, wenn nein dann gibt es eine Fehlermeldung
