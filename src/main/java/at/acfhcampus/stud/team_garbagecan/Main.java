@@ -7,6 +7,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -74,7 +76,7 @@ public class Main extends Application implements Serializable {
         Trashforce trashforce = new Trashforce();
         Muelltrennung muelltrennung = new Muelltrennung();
         //Glasmuell glasmuell = new Glasmuell();
-        Muelllaster muelllaster = new Muelllaster();    
+        Muelllaster muelllaster = new Muelllaster();
         Muellmagnet muellmagnet = new Muellmagnet();
         Muellangel muellangel = new Muellangel();
         //Recycling recycling = new Recycling();
@@ -97,6 +99,14 @@ public class Main extends Application implements Serializable {
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Texte und ihre Eigenschaften */
+
+        DropShadow shadow = new DropShadow();
+        shadow.setBlurType(BlurType.GAUSSIAN);
+        shadow.setWidth(10);
+        shadow.setHeight(10);
+        shadow.setOffsetX(3);
+        shadow.setOffsetY(2);
+
         text.setText("GARBAGE-CLICKER");
         text.setX(50);
         text.setY(50);
@@ -107,17 +117,24 @@ public class Main extends Application implements Serializable {
 
         klicksPerSec.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         klicksPerSec.setFill(Color.AQUAMARINE);
+        klicksPerSec.setEffect(shadow);
 
 
         clickPower.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         clickPower.setFill(Color.BEIGE);
+        clickPower.setEffect(shadow);
 
 
         spielzeit.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         spielzeit.setFill(Color.CORAL);
+        spielzeit.setEffect(shadow);
 
         müllGesammelt.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        müllGesammelt.setFill(Color.BLUEVIOLET);
+        müllGesammelt.setFill(Color.VIOLET);
+        müllGesammelt.setEffect(shadow);
+
+
+
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -142,10 +159,10 @@ public class Main extends Application implements Serializable {
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         /* Mittlere Box */
-        middleBox.setSpacing(30);
+        middleBox.setSpacing(20);
         middleBox.setAlignment(Pos.CENTER);
         middleBox.setMinWidth(300);
-        middleBox.setPadding(new Insets(20, 10, 20, 10));
+        middleBox.setPadding(new Insets(30, 10, 20, 10));
         middleBox.getChildren().addAll(garbage, canButton, klicksPerSec, spielzeit, clickPower, müllGesammelt);
         middleBox.setMinHeight(HEIGHT - 150);
         middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middlebox.png);");
@@ -301,6 +318,7 @@ public class Main extends Application implements Serializable {
             @Override
             public void run() {
                 garbage.setText(String.format("Amount of Garbage %n%d", cash.longValue()));
+                garbage.setEffect(shadow);
                 spielzeit.setText("Time: " + time);
                 müllGesammelt.setText("Total Garbage: " + cashTrace);
                 clickPower.setText("Click Power: " + clickingPower);
