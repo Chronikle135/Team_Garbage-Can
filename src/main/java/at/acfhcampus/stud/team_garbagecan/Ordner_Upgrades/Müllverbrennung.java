@@ -9,7 +9,7 @@ public class Müllverbrennung extends Upgrades implements Serializable {        
     }
 
     public Müllverbrennung() {
-        super(10,0,5,"Müllverbrennung", "/at/acfhcampus/stud/team_garbagecan/Mullverbrennung.png");
+        super(1000,0,150000,"Müllverbrennung", "/at/acfhcampus/stud/team_garbagecan/Mullverbrennung.png");
 
 
     }

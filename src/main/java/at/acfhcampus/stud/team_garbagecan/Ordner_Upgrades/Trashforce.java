@@ -5,6 +5,6 @@ import java.io.Serializable;
 public class Trashforce extends Upgrades implements Serializable {
     private static final long serialVersionUID = 23145978L;
 	public Trashforce() {
-        super(50,0,800,"Trashforce", "/at/acfhcampus/stud/team_garbagecan/trashForce.png");
+        super(30,0,100,"Trashforce", "/at/acfhcampus/stud/team_garbagecan/trashForce.png");
     }
 }

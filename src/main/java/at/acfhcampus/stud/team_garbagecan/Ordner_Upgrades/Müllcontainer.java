@@ -5,6 +5,6 @@ import java.io.Serializable;
 public class Müllcontainer extends Upgrades implements Serializable {
     private static final long serialVersionUID = 789123112L;
 	public Müllcontainer() {
-        super(10,0,100,"Müllcontainer", "/at/acfhcampus/stud/team_garbagecan/mullcontainer.png");
+        super(600,0,600000,"Müllcontainer", "/at/acfhcampus/stud/team_garbagecan/mullcontainer.png");
     }
 }
