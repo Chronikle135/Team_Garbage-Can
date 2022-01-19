@@ -80,7 +80,7 @@ public class Main extends Application implements Serializable {
         Muellmagnet muellmagnet = new Muellmagnet();
         Muellangel muellangel = new Muellangel();
         //Recycling recycling = new Recycling();
-        Muelltuete  muelltuete = new Muelltuete();
+        Muelltuete muelltuete = new Muelltuete();
         //Muellsack  muellsack = new Muellsack();
         //Bioabfall bioabfall = new Bioabfall();
         //Sondermuell sondermuell = new Sondermuell();
@@ -132,9 +132,6 @@ public class Main extends Application implements Serializable {
         müllGesammelt.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         müllGesammelt.setFill(Color.VIOLET);
         müllGesammelt.setEffect(shadow);
-
-
-
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -323,7 +320,11 @@ public class Main extends Application implements Serializable {
                 müllGesammelt.setText("Total Garbage: " + cashTrace);
                 clickPower.setText("Click Power: " + clickingPower);
                 klicksPerSec.setText("Garbage/s: " + perSecond());
-
+                for (Upgrade2 u : Upgrade2.upgradeList2) {
+                    changeTo += (u.getClickpower() * u.getAmount());
+                }
+                clickingPower = changeTo + 1;
+                changeTo = 0;
 
             }
         };
@@ -338,9 +339,6 @@ public class Main extends Application implements Serializable {
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* Funktionen die wir brauchen */
     private void clicki() {                                                             //Klickevent dass bei jedem Klick passiert
-        for (Upgrade2 u : Upgrade2.upgradeList2) {
-            changeTo += (u.getClickpower() * u.getAmount());
-        }
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -357,8 +355,6 @@ public class Main extends Application implements Serializable {
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
 
-        clickingPower = changeTo + 1;
-        changeTo = 0;
         cash = cash.add(BigInteger.valueOf(clickingPower));                             //clickingPower gibt an wie viel Währung man pro Klick bekommt
         cashTrace = cashTrace.add(BigInteger.valueOf(clickingPower));
     }
@@ -389,9 +385,6 @@ public class Main extends Application implements Serializable {
         return sumOfIncome;
     }
 
-    public BigInteger getCashTrace() {
-        return cashTrace;
-    }
 
     public void setCashTrace(BigInteger cashTrace) {
         this.cashTrace = cashTrace;
@@ -426,23 +419,19 @@ public class Main extends Application implements Serializable {
         ObjectInputStream ois = new ObjectInputStream(fis);
         for (Upgrades u : Upgrades.upgradeList) {
             u.setCost((Integer) ois.readObject());
-            int newAmount = (int) ois.readObject();
-            u.getRealShopItem().setAmount(new Text(String.format("Amount: %d", u.amount)));
-            u.setAmount(newAmount);
-            System.out.println(u.amount);
+            u.setAmount((int) ois.readObject());
+            u.getRealShopItem().incAmount(u.amount);
         }
         for (Upgrade2 u : Upgrade2.upgradeList2) {
             u.setCost((Integer) ois.readObject());
-            int newAmount = (int) ois.readObject();
-            u.getRealShopItem().setAmount(newAmount);
-            u.setAmount(newAmount);
-            System.out.println(u.amount);
+            u.setAmount((int) ois.readObject());
+            u.getRealShopItem().incAmount(u.amount);
         }
         setCash(BigInteger.valueOf(Long.parseLong(ois.readUTF())));
         setCashTrace(BigInteger.valueOf(Long.parseLong(ois.readUTF())));
         time = Integer.parseInt(ois.readUTF());
+
         ois.close();
-        System.out.println(cash.toString() + cashTrace.toString() + time);
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

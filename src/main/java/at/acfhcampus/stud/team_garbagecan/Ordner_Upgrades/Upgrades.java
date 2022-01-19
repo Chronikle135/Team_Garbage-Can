@@ -41,7 +41,7 @@ public abstract class Upgrades implements Serializable {                        
         amount++;                                                                   //Erhöht das Amount eines Upgrades wenn man es kauft
         setCash(getCash().subtract(BigInteger.valueOf(cost)));                      //Zieht die Kosten eines Upgrades nach dem Kaufen von der Währung die man hat ab
         cost = (int) (cost + Math.exp(amount * 0.5));                               //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nächsten Kosten des Upgradekaufes
-        shopItem.incAmount();                                                       //Ändert die Anzahl eines Upgrades die angezeigt wird auf den korrekten Wert nach dem Kaufen
+        shopItem.incAmount(amount);                                                       //Ändert die Anzahl eines Upgrades die angezeigt wird auf den korrekten Wert nach dem Kaufen
         shopItem.setPrice(cost);                                                    //Ändert die Kosten eines Upgrades die angezeigt werden auf den korrekten Wert nach dem Kaufen
     }
 
@@ -91,11 +91,11 @@ public abstract class Upgrades implements Serializable {                        
             a.setAlertType(Alert.AlertType.ERROR);                      // macht das rote X
         }
     }
+    public ShopItem getRealShopItem() {                                                     //Getter für die einzelnen Shopitems
+        return shopItem;
+    }
 
     public HBox getShopItem() {                                                     //Getter für die einzelnen Shopitems
         return shopItem.getShopElements();
-    }
-    public ShopItem getRealShopItem() {                                                     //Getter für die einzelnen Shopitems
-        return shopItem;
     }
 }

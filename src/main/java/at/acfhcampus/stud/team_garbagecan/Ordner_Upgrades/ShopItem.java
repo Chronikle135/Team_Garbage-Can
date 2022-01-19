@@ -1,6 +1,5 @@
 package at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades;
 
-import at.acfhcampus.stud.team_garbagecan.Upgrades_2.Upgrade2;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,11 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
-import java.io.Serializable;
-import java.math.BigInteger;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ShopItem {
 
@@ -82,38 +76,12 @@ public class ShopItem {
         return shopElements;
     }
 
-    public void incAmount() {                                                                       //Funktion zur Anzeige der Anzahl eines Upgrades im Besitz
-        amount.setText(String.format("Amount: %d", Integer.parseInt(amount.getText().split(" ")[1]) + 1));
+    public void incAmount(int text) {                                                                       //Funktion zur Anzeige der Anzahl eines Upgrades im Besitz
+        amount.setText(String.format("Amount: %d", text));
     }
 
     public void setPrice(int newPrice) {                                                            //Funktion zur Anzeige des Preises eines Upgrades
         price.setText(String.format("Price: %d", newPrice));
     }
 
-    public Text getPrice() {
-        return price;
-    }
-
-    public void setPrice(Text price) {
-        this.price = price;
-    }
-
-    public Text getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Text amount) {
-        this.amount = amount;
-    }
-
-    public void setAmount(int newAmount) {
-    }
-
-    public Text getName() {
-        return name;
-    }
-
-    public void setName(Text name) {
-        this.name = name;
-    }
 }

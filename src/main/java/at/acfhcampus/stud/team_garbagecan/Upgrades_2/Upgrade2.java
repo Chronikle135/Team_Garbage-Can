@@ -9,10 +9,11 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
 import static at.acfhcampus.stud.team_garbagecan.Main.getCash;
 import static at.acfhcampus.stud.team_garbagecan.Main.setCash;
 
-public abstract class Upgrade2 implements Serializable{
+public abstract class Upgrade2 implements Serializable {
     /* Variablen eins Upgrades */
     public int clickpower;                                                          //Ein Upgrade muss also haben: clickpower
     public String name;                                                             //Einen Namen
@@ -35,7 +36,7 @@ public abstract class Upgrade2 implements Serializable{
         amount++;                                                                   //ErhÃ¶ht das Amount eines Upgrades wenn man es kauft
         setCash(getCash().subtract(BigInteger.valueOf(cost)));                      //Zieht die Kosten eines Upgrades nach dem Kaufen von der WÃ¤hrung die man hat ab
         cost = (int) (cost + Math.exp(amount * 0.5));                                //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nÃ¤chsten Kosten des Upgradekaufes
-        shopItem2.incAmount();                                                       //Ã„ndert die Anzahl eines Upgrades die angezeigt wird auf den korrekten Wert nach dem Kaufen
+        shopItem2.incAmount(amount);                                                         //Ã„ndert die Anzahl eines Upgrades die angezeigt wird auf den korrekten Wert nach dem Kaufen
         shopItem2.setPrice(cost);                                                    //Ã„ndert die Kosten eines Upgrades die angezeigt werden auf den korrekten Wert nach dem Kaufen
     }
 
@@ -54,8 +55,7 @@ public abstract class Upgrade2 implements Serializable{
     public void checkIfMoney() {
         if (getCash().longValue() >= cost) {
             buy();                                                                  //checkt ob wir genug WÃ¤hrung haben um uns ein Upgrade zu kaufen, wenn ja wird es gekauft
-        }
-        else {
+        } else {
             //System.out.println("WE DON´T HAVE THE CAPACITIES");                    //Wenn wir nicht genug WÃ¤hrung haben wird eine Fehlermeldung aufgefÃ¼hrt.
 
             Alert a = new Alert(Alert.AlertType.INFORMATION);
@@ -72,8 +72,6 @@ public abstract class Upgrade2 implements Serializable{
 
     public int getAmount() {
         return amount;
-    }
-    public void setAmount(Object readObject) {
     }
     public ShopItem2 getRealShopItem() {                                                     //Getter für die einzelnen Shopitems
         return shopItem2;
