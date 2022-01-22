@@ -84,8 +84,8 @@ public class Main extends Application implements Serializable {
         //Muellsack  muellsack = new Muellsack();
         //Bioabfall bioabfall = new Bioabfall();
         //Sondermuell sondermuell = new Sondermuell();
-        Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
-        Muellspiess müllspiess = new Muellspiess();
+        //Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
+        //Muellspiess müllspiess = new Muellspiess();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* GUI Initialisierungen */
@@ -102,8 +102,8 @@ public class Main extends Application implements Serializable {
 
         DropShadow shadow = new DropShadow();
         shadow.setBlurType(BlurType.GAUSSIAN);
-        shadow.setWidth(10);
-        shadow.setHeight(10);
+        shadow.setWidth(5);
+        shadow.setHeight(5);
         shadow.setOffsetX(3);
         shadow.setOffsetY(2);
 
@@ -115,22 +115,22 @@ public class Main extends Application implements Serializable {
         garbage.setFill(Color.WHITE);
         garbage.setTextAlignment(TextAlignment.CENTER);
 
-        klicksPerSec.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        klicksPerSec.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
         klicksPerSec.setFill(Color.AQUAMARINE);
         klicksPerSec.setEffect(shadow);
 
 
-        clickPower.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        clickPower.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
         clickPower.setFill(Color.BEIGE);
         clickPower.setEffect(shadow);
 
 
-        spielzeit.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        spielzeit.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
         spielzeit.setFill(Color.CORAL);
         spielzeit.setEffect(shadow);
 
-        müllGesammelt.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        müllGesammelt.setFill(Color.VIOLET);
+        müllGesammelt.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+        müllGesammelt.setFill(Color.WHITE);
         müllGesammelt.setEffect(shadow);
 
 
@@ -162,7 +162,7 @@ public class Main extends Application implements Serializable {
         middleBox.setPadding(new Insets(30, 10, 20, 10));
         middleBox.getChildren().addAll(garbage, canButton, klicksPerSec, spielzeit, clickPower, müllGesammelt);
         middleBox.setMinHeight(HEIGHT - 150);
-        middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middlebox.png);");
+        middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middleboxLight.png);");
 
 
         /*
@@ -176,8 +176,8 @@ public class Main extends Application implements Serializable {
 
         leftSideBox.setMinWidth(200);
         leftSideBox.setMinHeight(HEIGHT - 150);
-        leftSideBox.setPadding(new Insets(4, 5, 4, 5));
-        leftSideBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sidebox.png);");
+        leftSideBox.setPadding(new Insets(82, 5, 4, 5));
+        leftSideBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sideboxNGarbage.png);");
         for (Upgrade2 u : Upgrade2.upgradeList2) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             leftSideBox.getChildren().add(u.getShopItem2());
         }
@@ -187,8 +187,8 @@ public class Main extends Application implements Serializable {
         /* Rechte/Shop Box */
         rigthSideBoxTop.setMinWidth(200);
         rigthSideBoxTop.setMinHeight(HEIGHT - 150);
-        rigthSideBoxTop.setPadding(new Insets(4, 5, 4, 5));
-        rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sidebox.png);");
+        rigthSideBoxTop.setPadding(new Insets(82, 5, 4, 5));
+        rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sideboxNClickpower.png);");
         //store = new ImageView("url(/at/acfhcampus/stud/team_garbagecan/store.jpg)");
         for (Upgrades u : Upgrades.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             rigthSideBoxTop.getChildren().add(u.getShopItem());
@@ -351,7 +351,7 @@ public class Main extends Application implements Serializable {
             }
         }, 200);//wait 1000ms before doing the action
 
-        canButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/garbage-can_small_plusEins.png);" +
+        canButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/garbage-can_small_plus.png);" +
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
 

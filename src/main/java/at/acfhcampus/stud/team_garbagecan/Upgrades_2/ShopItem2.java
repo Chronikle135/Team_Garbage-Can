@@ -33,7 +33,7 @@ public class ShopItem2 {
         shopElements.setMinHeight(78);
         shopElements.setMinWidth(100);
         shopElements.setPadding(new Insets(14, 5, 5, 10));
-        shopElements.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/shopitemNew.png);");
+        shopElements.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/shopitemDark.png);");
 
         buy = new Button();                                                                         //Button zum kaufen des Upgrades
         buy.setOnMouseClicked(e -> upgrades.checkIfMoney());                                        //Klickevent checkt zuerst ob man genug Geld hat, wenn ja wird es gekauft, wenn nein dann gibt es eine Fehlermeldung
@@ -41,8 +41,8 @@ public class ShopItem2 {
 
         DropShadow shadow = new DropShadow();
         shadow.setBlurType(BlurType.GAUSSIAN);
-        shadow.setWidth(10);
-        shadow.setHeight(10);
+        shadow.setWidth(5);
+        shadow.setHeight(5);
         shadow.setOffsetX(3);
         shadow.setOffsetY(2);
 
@@ -52,12 +52,12 @@ public class ShopItem2 {
         this.name.setEffect(shadow);
 
         this.price = new Text(String.format("Price: %d", upgrades.cost));
-        this.price.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+        this.price.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         this.price.setFill(Color.WHITE);
         this.price.setEffect(shadow);
 
         this.amount = new Text(String.format("Amount: %d", upgrades.amount));
-        this.amount.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+        this.amount.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         this.amount.setFill(Color.WHITE);
         this.amount.setEffect(shadow);
 
