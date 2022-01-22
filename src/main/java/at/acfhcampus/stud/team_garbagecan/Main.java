@@ -59,7 +59,7 @@ public class Main extends Application implements Serializable {
     Button loadButton = new Button();
     Scene mainScene = new Scene(finalcontainer, WIDTH, HEIGHT);
     Scene pauseScene = new Scene(containerPauseBox);
-    //Button errorButton = new Button();
+    Button errorButton = new Button();
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
@@ -97,6 +97,7 @@ public class Main extends Application implements Serializable {
         Text clickPower = new Text();
         Text playTime = new Text();
         Text sumOfGarbage = new Text();
+        Text notEnoughCans = new Text();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Texte und ihre Eigenschaften */
@@ -168,6 +169,7 @@ public class Main extends Application implements Serializable {
         middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middleboxLight.png);");
 
 
+
         /*
                 -fx-border-left: black;" +
                 "-fx-border-style: solid none solid solid;" +
@@ -197,7 +199,10 @@ public class Main extends Application implements Serializable {
             rigthSideBoxTop.getChildren().add(u.getShopItem());
         }
 
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        errorButton.setMinWidth(200);
+        errorButton.setMinHeight(200);
+        errorButton.setStyle("![](../../../../../resources/at/acfhcampus/stud/team_garbagecan/stopSignEmpty.png)");
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         pauseButton.setMinWidth(100);
         pauseButton.setMinHeight(25);

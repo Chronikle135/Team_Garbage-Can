@@ -58,11 +58,11 @@ public abstract class Upgrade2 implements Serializable {
         } else {
             //System.out.println("WE DON´T HAVE THE CAPACITIES");                    //Wenn wir nicht genug WÃ¤hrung haben wird eine Fehlermeldung aufgefÃ¼hrt.
 
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setContentText("WE DON´T HAVE THE CAPACITIES");           // Anzeige der Fehlermeldung
+            Alert a = new Alert(Alert.AlertType.ERROR);                 // macht das rote X
+            a.setContentText("YOU DON'T HAVE ENOUGH CANS!!");           // Anzeige der Fehlermeldung
             a.showAndWait();                                            // wartet darauf dass man ok drückt
             a.setAlertType(Alert.AlertType.ERROR);
-        }// macht das rote X
+        }
 
     }
 

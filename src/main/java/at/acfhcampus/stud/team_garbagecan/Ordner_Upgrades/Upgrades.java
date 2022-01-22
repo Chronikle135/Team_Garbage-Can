@@ -85,10 +85,10 @@ public abstract class Upgrades implements Serializable {                        
             text.add(caution);*/
 
 
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setContentText("WE DON´T HAVE THE CAPACITIES");           // Anzeige der Fehlermeldung
-            a.showAndWait();                                            // wartet darauf dass man ok drückt
-            a.setAlertType(Alert.AlertType.ERROR);                      // macht das rote X
+            Alert a = new Alert(Alert.AlertType.ERROR);                 // macht das rote X
+            a.setContentText("YOU DON´T HAVE ENOUGH CANS!!");           // Anzeige der Fehlermeldung
+            a.show();                                                   // wartet darauf dass man ok drückt
+            a.setAlertType(Alert.AlertType.ERROR);
         }
     }
     public ShopItem getRealShopItem() {                                                     //Getter für die einzelnen Shopitems
