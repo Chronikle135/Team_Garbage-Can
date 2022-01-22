@@ -59,6 +59,7 @@ public class Main extends Application implements Serializable {
     Button loadButton = new Button();
     Scene mainScene = new Scene(finalcontainer, WIDTH, HEIGHT);
     Scene pauseScene = new Scene(containerPauseBox);
+    //Button errorButton = new Button();
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
@@ -94,8 +95,8 @@ public class Main extends Application implements Serializable {
         Text garbage = new Text();
         Text klicksPerSec = new Text();
         Text clickPower = new Text();
-        Text spielzeit = new Text();
-        Text müllGesammelt = new Text();
+        Text playTime = new Text();
+        Text sumOfGarbage = new Text();
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Texte und ihre Eigenschaften */
@@ -111,6 +112,8 @@ public class Main extends Application implements Serializable {
         text.setX(50);
         text.setY(50);
         text.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
+
+
         garbage.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         garbage.setFill(Color.WHITE);
         garbage.setTextAlignment(TextAlignment.CENTER);
@@ -125,13 +128,13 @@ public class Main extends Application implements Serializable {
         clickPower.setEffect(shadow);
 
 
-        spielzeit.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
-        spielzeit.setFill(Color.CORAL);
-        spielzeit.setEffect(shadow);
+        playTime.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+        playTime.setFill(Color.CORAL);
+        playTime.setEffect(shadow);
 
-        müllGesammelt.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
-        müllGesammelt.setFill(Color.WHITE);
-        müllGesammelt.setEffect(shadow);
+        sumOfGarbage.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+        sumOfGarbage.setFill(Color.WHITE);
+        sumOfGarbage.setEffect(shadow);
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -143,7 +146,7 @@ public class Main extends Application implements Serializable {
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
         canButton.setOnMouseClicked(e -> clicki());                                   //Klickevent beim drücken des Buttons
-
+        canButton.setEffect(shadow);
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Boxensystem */
@@ -160,7 +163,7 @@ public class Main extends Application implements Serializable {
         middleBox.setAlignment(Pos.CENTER);
         middleBox.setMinWidth(300);
         middleBox.setPadding(new Insets(30, 10, 20, 10));
-        middleBox.getChildren().addAll(garbage, canButton, klicksPerSec, spielzeit, clickPower, müllGesammelt);
+        middleBox.getChildren().addAll(garbage, canButton, klicksPerSec, playTime, clickPower, sumOfGarbage);
         middleBox.setMinHeight(HEIGHT - 150);
         middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middleboxLight.png);");
 
@@ -316,8 +319,8 @@ public class Main extends Application implements Serializable {
             public void run() {
                 garbage.setText(String.format("Amount of Garbage %n%d", cash.longValue()));
                 garbage.setEffect(shadow);
-                spielzeit.setText("Time: " + time);
-                müllGesammelt.setText("Total Garbage: " + cashTrace);
+                playTime.setText("Time: " + time);
+                sumOfGarbage.setText("Total Garbage: " + cashTrace);
                 clickPower.setText("Click Power: " + clickingPower);
                 klicksPerSec.setText("Garbage/s: " + perSecond());
                 for (Upgrade2 u : Upgrade2.upgradeList2) {
