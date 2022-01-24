@@ -185,7 +185,7 @@ public class Main extends Application implements Serializable {
         leftSideBox.setMinWidth(200);
         leftSideBox.setMinHeight(HEIGHT - 150);
         leftSideBox.setPadding(new Insets(82, 5, 4, 5));
-        leftSideBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sideboxNGarbage.png);");
+        leftSideBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sideboxNClickPower.png);");
         for (Upgrade2 u : Upgrade2.upgradeList2) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             leftSideBox.getChildren().add(u.getShopItem2());
         }
@@ -196,7 +196,7 @@ public class Main extends Application implements Serializable {
         rigthSideBoxTop.setMinWidth(200);
         rigthSideBoxTop.setMinHeight(HEIGHT - 150);
         rigthSideBoxTop.setPadding(new Insets(82, 5, 4, 5));
-        rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sideboxNClickpower.png);");
+        rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sideboxNGarbage.png);");
         //store = new ImageView("url(/at/acfhcampus/stud/team_garbagecan/store.jpg)");
         for (Upgrades u : Upgrades.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             rigthSideBoxTop.getChildren().add(u.getShopItem());
