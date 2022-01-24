@@ -7,10 +7,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -41,7 +42,6 @@ public class Main extends Application implements Serializable {
     /* GUI Elemente */
     private HBox containerHBox = new HBox();
     private VBox rigthSideBoxTop = new VBox();
-    private VBox rigthSideBoxBottom = new VBox();
     private VBox middleBox = new VBox();
     private VBox leftSideBox = new VBox();
     private VBox finalcontainer = new VBox();
@@ -51,7 +51,6 @@ public class Main extends Application implements Serializable {
     private HBox pause2 = new HBox();
     private HBox pause3 = new HBox();
     private HBox containerPauseBox = new HBox();
-    ImageView store;
     Button canButton = new Button();
     Button pauseButton = new Button();
     Button continueButton = new Button();
@@ -60,6 +59,9 @@ public class Main extends Application implements Serializable {
     Scene mainScene = new Scene(finalcontainer, WIDTH, HEIGHT);
     Scene pauseScene = new Scene(containerPauseBox);
     Button errorButton = new Button();
+    Popup save = new Popup();
+    Popup load = new Popup();
+    Label label = new Label("Saved successfully");
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
@@ -74,6 +76,7 @@ public class Main extends Application implements Serializable {
         //Restmuell restmuell = new Restmuell();
         //Papiermuell papiermuell = new Papiermuell();
         //Wertstoffhof wertstoffhof = new Wertstoffhof();
+
         Trashforce trashforce = new Trashforce();
         Muelltrennung muelltrennung = new Muelltrennung();
         //Glasmuell glasmuell = new Glasmuell();
@@ -87,6 +90,7 @@ public class Main extends Application implements Serializable {
         //Sondermuell sondermuell = new Sondermuell();
         //Freiwillige_Helfer freiwillige_Helfer = new Freiwillige_Helfer();
         //Muellspiess müllspiess = new Muellspiess();
+
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* GUI Initialisierungen */
@@ -178,7 +182,6 @@ public class Main extends Application implements Serializable {
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Linke Box */
 
-
         leftSideBox.setMinWidth(200);
         leftSideBox.setMinHeight(HEIGHT - 150);
         leftSideBox.setPadding(new Insets(82, 5, 4, 5));
@@ -216,8 +219,6 @@ public class Main extends Application implements Serializable {
         footer.setPadding(new Insets(5, 5, 5, 5));
         footer.getChildren().addAll(pauseButton);
         footer.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/footer.png);");
-        //footer.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
-
 //----------------------v-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Box in der die mittlere, rechte und linke Box sind */
         containerHBox.setMaxHeight(HEIGHT);
@@ -244,9 +245,11 @@ public class Main extends Application implements Serializable {
         continueButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/continue.png);" +
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
-        continueButton.setOnMouseClicked(f -> primaryStage.setScene(mainScene));
-
-        // Save Button
+        continueButton.setOnMouseClicked(t -> {
+            primaryStage.setScene(mainScene);
+            load.setOpacity(0);
+            save.setOpacity(0);
+        });
         pause2.setMinHeight(50);
         pause2.setMinWidth(300);
         pause2.setAlignment(Pos.CENTER);
@@ -276,12 +279,12 @@ public class Main extends Application implements Serializable {
         loadButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/load.png);" +
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
-        loadButton.setOnMouseClicked(f -> {
+        loadButton.setOnMouseClicked(f ->
+
+        {
             try {
                 loadGame();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });
@@ -300,7 +303,19 @@ public class Main extends Application implements Serializable {
         primaryStage.setScene(mainScene);
         primaryStage.show();
 
+        save.centerOnScreen();
+        save.setHeight(150);
+        save.setWidth(150);
+        save.getContent().add(label);
+        save.show(primaryStage);
+        save.setOpacity(0);
 
+        load.centerOnScreen();
+        load.setHeight(150);
+        load.setWidth(150);
+        load.getContent().add(label);
+        load.show(primaryStage);
+        load.setOpacity(0);
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         /* Timer und seine Funktionen */
@@ -310,12 +325,8 @@ public class Main extends Application implements Serializable {
             public void run() {
                 time++;
                 for (Upgrades u : Upgrades.upgradeList) {                                 //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
-                    cash = cash.add(u.calcincome());
-                    cashTrace = cashTrace.add(u.calcincome());
-                    u.getShopItem().setVisible(visibility(u));                            //Überprüfung der Sichtbarkeit jedes Upgrades
-                }
-                for (Upgrade2 u : Upgrade2.upgradeList2) {                                //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
-                    u.getShopItem2().setVisible(visibility2(u));                          //Überprüfung der Sichtbarkeit jedes Upgrades
+                    cash = cash.add(u.calcIncome());
+                    cashTrace = cashTrace.add(u.calcIncome());
                 }
             }
         };
@@ -330,16 +341,31 @@ public class Main extends Application implements Serializable {
                 klicksPerSec.setText("Garbage/s: " + perSecond());
                 for (Upgrade2 u : Upgrade2.upgradeList2) {
                     changeTo += (u.getClickpower() * u.getAmount());
+                    u.getShopItem2().setVisible(visibility2(u));
+                    if (getCash().longValue() < u.getCost()) {
+                        u.getShopItem2().setOpacity(0.3);
+                        u.getRealShopItem().getBuy().setDisable(true);
+                    } else {
+                        u.getShopItem2().setOpacity(1);
+                        u.getRealShopItem().getBuy().setDisable(false);
+                    }
+                }
+                for (Upgrades u : Upgrades.upgradeList) {
+                    u.getShopItem().setVisible(visibility(u));
+                    if (getCash().longValue() < u.getCost()) {
+                        u.getShopItem().setOpacity(0.3);
+                        u.getRealShopItem().getBuy().setDisable(true);
+                    } else {
+                        u.getShopItem().setOpacity(1);
+                        u.getRealShopItem().getBuy().setDisable(false);
+                    }
                 }
                 clickingPower = changeTo + 1;
                 changeTo = 0;
-
             }
         };
         tick.schedule(getting, 0, TICKRATE);                                        //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
         tick.schedule(money, 0, 1);
-
-
         // Close Game
 
     }
@@ -393,7 +419,6 @@ public class Main extends Application implements Serializable {
         return sumOfIncome;
     }
 
-
     public void setCashTrace(BigInteger cashTrace) {
         this.cashTrace = cashTrace;
     }
@@ -420,6 +445,7 @@ public class Main extends Application implements Serializable {
         oos.writeUTF(String.valueOf(cashTrace));
         oos.writeUTF(String.valueOf(time));
         oos.close();
+        save.setOpacity(1);
     }
 
     public void loadGame() throws IOException, ClassNotFoundException {
@@ -438,8 +464,8 @@ public class Main extends Application implements Serializable {
         setCash(BigInteger.valueOf(Long.parseLong(ois.readUTF())));
         setCashTrace(BigInteger.valueOf(Long.parseLong(ois.readUTF())));
         time = Integer.parseInt(ois.readUTF());
-
         ois.close();
+        load.setOpacity(1);
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -447,4 +473,5 @@ public class Main extends Application implements Serializable {
     public static void main(String[] args) {
         launch(args);
     }
+
 }//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

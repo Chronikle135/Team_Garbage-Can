@@ -1,6 +1,5 @@
 package at.acfhcampus.stud.team_garbagecan.Upgrades_2;
 
-import at.acfhcampus.stud.team_garbagecan.Ordner_Upgrades.ShopItem;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -35,7 +34,7 @@ public abstract class Upgrade2 implements Serializable {
     public void buy() {
         amount++;                                                                   //ErhÃ¶ht das Amount eines Upgrades wenn man es kauft
         setCash(getCash().subtract(BigInteger.valueOf(cost)));                      //Zieht die Kosten eines Upgrades nach dem Kaufen von der WÃ¤hrung die man hat ab
-        cost = (int) (cost + Math.exp(amount * 0.5));                                //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nÃ¤chsten Kosten des Upgradekaufes
+        cost = (int) (cost + (amount * 0.234 * cost));                                //Berechnet mit Hilfe einer exponentiellen Wachstumsfunktion die nÃ¤chsten Kosten des Upgradekaufes
         shopItem2.incAmount(amount);                                                         //Ã„ndert die Anzahl eines Upgrades die angezeigt wird auf den korrekten Wert nach dem Kaufen
         shopItem2.setPrice(cost);                                                    //Ã„ndert die Kosten eines Upgrades die angezeigt werden auf den korrekten Wert nach dem Kaufen
     }
@@ -66,6 +65,7 @@ public abstract class Upgrade2 implements Serializable {
 
     }
 
+
     public int getClickpower() {
         return clickpower;
     }
@@ -80,3 +80,4 @@ public abstract class Upgrade2 implements Serializable {
         return shopItem2.getShopElements();
     }
 }
+

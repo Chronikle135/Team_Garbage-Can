@@ -86,5 +86,12 @@ public class ShopItem2 {
         price.setText(String.format("Price: %d", newPrice));
     }
 
+    public Button getBuy() {
+        return buy;
+    }
+
+    public void setBuy(Button buy) {
+        this.buy = buy;
+    }
 }
 
