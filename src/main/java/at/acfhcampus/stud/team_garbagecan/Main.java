@@ -61,7 +61,8 @@ public class Main extends Application implements Serializable {
     Button errorButton = new Button();
     Popup save = new Popup();
     Popup load = new Popup();
-    Label label = new Label("Saved successfully");
+    Label saved = new Label("Saved successfully");
+    Label loaded = new Label("Loaded successfully");
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
@@ -266,6 +267,18 @@ public class Main extends Application implements Serializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            Timer timerSaved = new Timer();
+            timerSaved.schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    containerPauseBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pauseBackground.png);");
+                }
+            }, 1000);//wait 1000ms before doing the action
+
+            containerPauseBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pauseBackgroundSaved.png);");
+
         });
 
         //Load Button
@@ -287,6 +300,17 @@ public class Main extends Application implements Serializable {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+
+            Timer timerLoaded = new Timer();
+            timerLoaded.schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    containerPauseBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pauseBackground.png);");
+                }
+            }, 1000);//wait 1000ms before doing the action
+
+            containerPauseBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pauseBackgroundLoaded.png);");
         });
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Einblenden einer Hintergrundfarbe für die 3 zentralen Boxen zum Bugtesten */
@@ -306,14 +330,14 @@ public class Main extends Application implements Serializable {
         save.centerOnScreen();
         save.setHeight(150);
         save.setWidth(150);
-        save.getContent().add(label);
+        //save.getContent().add(saved);
         save.show(primaryStage);
         save.setOpacity(0);
 
         load.centerOnScreen();
         load.setHeight(150);
         load.setWidth(150);
-        load.getContent().add(label);
+        //load.getContent().add(loaded);
         load.show(primaryStage);
         load.setOpacity(0);
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
