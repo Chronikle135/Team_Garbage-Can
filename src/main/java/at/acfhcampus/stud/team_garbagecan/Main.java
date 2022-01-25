@@ -68,7 +68,6 @@ public class Main extends Application implements Serializable {
         Muellcontainer müllcontainer = new Muellcontainer();
         OeffentlicheMuelltonne OeffentlicheMuelltonne = new OeffentlicheMuelltonne();
         Muellabfuhr muellabfuhr = new Muellabfuhr();
-
         Trashforce trashforce = new Trashforce();
         Muelltrennung muelltrennung = new Muelltrennung();
         Muelllaster muelllaster = new Muelllaster();
@@ -296,7 +295,7 @@ public class Main extends Application implements Serializable {
         };
         TimerTask money = new TimerTask() {
             @Override
-            public void run() {
+            public void run() {                                                                                        //TimerTask zum Aktualisieren unserer Texte
                 garbage.setText(String.format("Amount of Garbage %n%d", cash.longValue()));
                 garbage.setEffect(shadow);
                 playTime.setText("Time: " + time);
@@ -304,9 +303,9 @@ public class Main extends Application implements Serializable {
                 clickPower.setText("Click Power: " + clickingPower);
                 klicksPerSec.setText("Garbage/s: " + perSecond());
                 for (Upgrade2 u : Upgrade2.upgradeList2) {
-                    changeTo += (u.getClickpower() * u.getAmount());
-                    u.getShopItem2().setVisible(visibility2(u));
-                    if (getCash().longValue() < u.getCost()) {
+                    changeTo += (u.getClickpower() * u.getAmount());                                                    //Zwischenspeichert die Summe der Clickpower aller gekauften Clickpowerupgrades
+                    u.getShopItem2().setVisible(visibility2(u));                                                        //Setzt die Sichtbarkeit eines Upgrades auf das Ergebniss der Visibilityfunktion
+                    if (getCash().longValue() < u.getCost()) {                                                          //Graut die Upgrades aus für die man momentan keinen Garbage hat und macht sie unclickable
                         u.getShopItem2().setOpacity(0.3);
                         u.getRealShopItem().getBuy().setDisable(true);
                     } else {
@@ -329,7 +328,7 @@ public class Main extends Application implements Serializable {
             }
         };
         tick.schedule(getting, 0, TICKRATE);                                                                      //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
-        tick.schedule(money, 0, 1);
+        tick.schedule(money, 0, 1);                                                                         //Timertask für die schnelle Aktualisierung von Texten und Eigenschaften von Upgrades
     }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -366,7 +365,7 @@ public class Main extends Application implements Serializable {
         else return irgendwas.cost <= getCash().doubleValue();
     }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    public static int perSecond() {
+    public static int perSecond() {                                                                                     //Rechnet sich das Income pro Sekunde aus wenn diese Funktion aufgerufen wird
         int sumOfIncome = 0;
         for (Upgrades u : Upgrades.upgradeList) {
             sumOfIncome += u.income * u.amount;
@@ -375,10 +374,10 @@ public class Main extends Application implements Serializable {
     }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /*Save Game */
-    public void saveGame() throws IOException {
-        FileOutputStream fos = new FileOutputStream("src/main/saveGame/saveGame.txt");
+    public void saveGame() throws IOException {                                                                         //Speicherfunktion die mit Hilfe von Serialisierung einzelne Variablen aus Objekten und Klassen abspeichert
+        FileOutputStream fos = new FileOutputStream("src/main/saveGame/saveGame.txt");                            //Fileouputstream mit einem Link aufs Gradledirectory damit es auf jedem Pc funktioniert
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-        for (Upgrades u : Upgrades.upgradeList) {
+        for (Upgrades u : Upgrades.upgradeList) {                                                                       //Speichert die Costs und Amounts von jedem Upgrade
             oos.writeObject(u.getCost());
             oos.writeObject(u.getAmount());
         }
@@ -386,14 +385,15 @@ public class Main extends Application implements Serializable {
             oos.writeObject(u.getCost());
             oos.writeObject(u.getAmount());
         }
-        oos.writeUTF(String.valueOf(cash));
+        oos.writeUTF(String.valueOf(cash));                                                                             //Speichert die Währung die man hat und andere Stats als UTF String ab
         oos.writeUTF(String.valueOf(cashTrace));
         oos.writeUTF(String.valueOf(time));
         oos.close();
+        fos.close();
     }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /*Load Game*/
-    public void loadGame() throws IOException, ClassNotFoundException {
+    public void loadGame() throws IOException, ClassNotFoundException {                                                 //Macht das selbe wie die Speicherfunktion nur andersrum :D
         FileInputStream fis = new FileInputStream("src/main/saveGame/saveGame.txt");
         ObjectInputStream ois = new ObjectInputStream(fis);
         for (Upgrades u : Upgrades.upgradeList) {
@@ -410,6 +410,7 @@ public class Main extends Application implements Serializable {
         setCashTrace(BigInteger.valueOf(Long.parseLong(ois.readUTF())));
         time = Integer.parseInt(ois.readUTF());
         ois.close();
+        fis.close();
     }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

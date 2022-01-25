@@ -72,16 +72,16 @@ public class ShopItem {
 
     /* Funktionen der Shopitems */
 
-    public HBox getShopElements() {                                                                                     //Getter für die Elemente
-        return shopElements;
-    }
-
     public void incAmount(int text) {                                                                                   //Funktion zur Anzeige der Anzahl eines Upgrades im Besitz
         amount.setText(String.format("Amount: %d", text));
     }
 
     public void setPrice(int newPrice) {                                                                                //Funktion zur Anzeige des Preises eines Upgrades
         price.setText(String.format("Price: %d", newPrice));
+    }
+
+    public HBox getShopElements() {                                                                                     //Getter für die Elemente
+        return shopElements;
     }
 
     public Button getBuy() {
