@@ -6,20 +6,20 @@ import javafx.scene.layout.HBox;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import static at.acfhcampus.stud.team_garbagecan.Main.getCash;
 import static at.acfhcampus.stud.team_garbagecan.Main.setCash;
 
-public abstract class Upgrade2 implements Serializable {
+public abstract class Upgrade2 implements Serializable{
     /* Variablen eins Upgrades */
     public int clickpower;                                                          //Ein Upgrade muss also haben: clickpower
     public String name;                                                             //Einen Namen
-    public int amount;                                                              //Wie oft das Upgrade gekauft wurde
+    public int amount;                                                              //Wie oft das Upgr^ade gekauft wurde
     public int cost;                                                                //Wie viel das Upgrade kostet
     public static List<Upgrade2> upgradeList2 = new ArrayList<>();                   //Erstellen einer Liste die bei der Erstellung eines neuen Upgrades dieses gleich in sich hinzufÃ¼gt
-    transient private ShopItem2 shopItem2;
+    private ShopItem2 shopItem2;
 
     public Upgrade2(int clickpower, int amount, int cost, String name, String url) {
         this.clickpower = clickpower;

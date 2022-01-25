@@ -19,7 +19,7 @@ public abstract class Upgrades implements Serializable {                        
     public int amount;                                                              //Wie oft das Upgrade gekauft wurde
     public int cost;                                                                //Wie viel das Upgrade kostet
     public static List<Upgrades> upgradeList = new ArrayList<>();                  //Erstellen einer Liste die bei der Erstellung eines neuen Upgrades dieses gleich in sich hinzufügt
-    transient private ShopItem shopItem;
+    private ShopItem shopItem;
 
     public Upgrades(int income, int amount, int cost, String name, String url) {    //Ganz normaler Konstruktor für die Upgrades
         this.income = income;

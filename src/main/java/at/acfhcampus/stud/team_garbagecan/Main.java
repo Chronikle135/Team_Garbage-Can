@@ -69,7 +69,7 @@ public class Main extends Application implements Serializable {
         /* Objekte und Upggrades die wir brauchen */
         Muellschiff muellschiff = new Muellschiff();
         Muelleimer muelleimer = new Muelleimer();
-        Muellverbrennung müllverbrennung = new Muellverbrennung();     //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
+        Muellverbrennung müllverbrennung = new Muellverbrennung();                                                      //Manuelles erstellen von den Objekten, hat als Werte income, cost, name und amount
         Muellcontainer müllcontainer = new Muellcontainer();
         OeffentlicheMuelltonne OeffentlicheMuelltonne = new OeffentlicheMuelltonne();
         Muellabfuhr muellabfuhr = new Muellabfuhr();
@@ -145,12 +145,12 @@ public class Main extends Application implements Serializable {
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Trashcanbutton */
         //Erstellen eines neuen Buttons
-        canButton.setMinWidth(icon.getWidth() / 2);                                   //Höhe und Breite Variabel machen
-        canButton.setMinHeight(icon.getHeight() / 2);                                 //Optische hexereien um dem ganzen ein Icon zuzuweisen und den Hintergrund auszublenden
+        canButton.setMinWidth(icon.getWidth() / 2);                                                                     //Höhe und Breite Variabel machen
+        canButton.setMinHeight(icon.getHeight() / 2);                                                                   //Optische hexereien um dem ganzen ein Icon zuzuweisen und den Hintergrund auszublenden
         canButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/garbage-can.png);" +
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
-        canButton.setOnMouseClicked(e -> clicki());                                   //Klickevent beim drücken des Buttons
+        canButton.setOnMouseClicked(e -> clicki());                                                                     //Klickevent beim drücken des Buttons
         canButton.setEffect(shadow);
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ public class Main extends Application implements Serializable {
         leftSideBox.setMinHeight(HEIGHT - 150);
         leftSideBox.setPadding(new Insets(82, 5, 4, 5));
         leftSideBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sideboxNClickPower.png);");
-        for (Upgrade2 u : Upgrade2.upgradeList2) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+        for (Upgrade2 u : Upgrade2.upgradeList2) {                                                                      //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             leftSideBox.getChildren().add(u.getShopItem2());
         }
 
@@ -198,7 +198,7 @@ public class Main extends Application implements Serializable {
         rigthSideBoxTop.setPadding(new Insets(82, 5, 4, 5));
         rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sideboxNGarbage.png);");
         //store = new ImageView("url(/at/acfhcampus/stud/team_garbagecan/store.jpg)");
-        for (Upgrades u : Upgrades.upgradeList) {                                     //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
+        for (Upgrades u : Upgrades.upgradeList) {                                                                       //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             rigthSideBoxTop.getChildren().add(u.getShopItem());
         }
 
@@ -319,12 +319,12 @@ public class Main extends Application implements Serializable {
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         /* Timer und seine Funktionen */
-        Timer tick = new Timer();                                                         //Erstellen eines neuen Timers
-        TimerTask getting = new TimerTask() {                                             //Erstellen einer TimerTasks, also einer Aufgabe die mit dem Tick eines Timers ausgeführt wird
+        Timer tick = new Timer();                                                                                       //Erstellen eines neuen Timers
+        TimerTask getting = new TimerTask() {                                                                           //Erstellen einer TimerTasks, also einer Aufgabe die mit dem Tick eines Timers ausgeführt wird
             @Override
             public void run() {
                 time++;
-                for (Upgrades u : Upgrades.upgradeList) {                                 //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
+                for (Upgrades u : Upgrades.upgradeList) {                                                               //Berechnung des aktuellen Währungsstandes plus des incomes von jedem Element in der Liste der Upgrades
                     cash = cash.add(u.calcIncome());
                     cashTrace = cashTrace.add(u.calcIncome());
                 }
@@ -452,7 +452,7 @@ public class Main extends Application implements Serializable {
         FileInputStream fis = new FileInputStream("src/main/saveGame/saveGame.txt");
         ObjectInputStream ois = new ObjectInputStream(fis);
         for (Upgrades u : Upgrades.upgradeList) {
-            u.setCost((Integer) ois.readObject());
+            u.setCost((int) ois.readObject());
             u.setAmount((int) ois.readObject());
             u.getRealShopItem().incAmount(u.amount);
         }
