@@ -26,17 +26,17 @@ public class ShopItem2 {
     Text amount;
 
     public ShopItem2(Image image, Upgrade2 upgrades) {
-        icon = new ImageView(image);                                                                //Icon das beim erstellen des Shopitems zugewiesen wird
-        icon.setFitHeight(25);                                                                      //Höhe und Breite des Icons
+        icon = new ImageView(image);                                                                                    //Icon das beim erstellen des Shopitems zugewiesen wird
+        icon.setFitHeight(25);                                                                                          //Höhe und Breite des Icons
         icon.setFitWidth(25);
-        shopElements = new HBox();                                                                  //Erstellen der Box in der alle Elemente des Upgrades drinnen sind
+        shopElements = new HBox();                                                                                      //Erstellen der Box in der alle Elemente des Upgrades drinnen sind
         shopElements.setMinHeight(78);
         shopElements.setMinWidth(100);
         shopElements.setPadding(new Insets(14, 5, 5, 10));
         shopElements.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/shopitemDark.png);");
 
-        buy = new Button();                                                                         //Button zum kaufen des Upgrades
-        buy.setOnMouseClicked(e -> upgrades.checkIfMoney());                                        //Klickevent checkt zuerst ob man genug Geld hat, wenn ja wird es gekauft, wenn nein dann gibt es eine Fehlermeldung
+        buy = new Button();                                                                                             //Button zum kaufen des Upgrades
+        buy.setOnMouseClicked(e -> upgrades.checkIfMoney());                                                            //Klickevent checkt zuerst ob man genug Geld hat, wenn ja wird es gekauft, wenn nein dann gibt es eine Fehlermeldung
         buy.setGraphic(icon);
 
         DropShadow shadow = new DropShadow();
@@ -46,7 +46,7 @@ public class ShopItem2 {
         shadow.setOffsetX(3);
         shadow.setOffsetY(2);
 
-        this.name = new Text(upgrades.name + "");                                                   //Erstellen der Textfelder für den Namen, Preis und Anzahl des Upgrades
+        this.name = new Text(upgrades.name + "");                                                                    //Erstellen der Textfelder für den Namen, Preis und Anzahl des Upgrades
         this.name.setFont(Font.font("Verdana", FontWeight.BOLD, 13));
         this.name.setFill(Color.WHITE);
         this.name.setEffect(shadow);
@@ -61,18 +61,18 @@ public class ShopItem2 {
         this.amount.setFill(Color.WHITE);
         this.amount.setEffect(shadow);
 
-        this.zwischenContainer = new VBox();                                                        //Neue Box in der dann alle Eigenschaften des Upgrades sind zum besseren Handhaben
-        zwischenContainer.getChildren().addAll(name, price, amount);                                //Aufnehmen der Eigenschaften in dem Zwischencontainer
-        zwischenContainer.setSpacing(1);                                                            //Weitere Formatierung
+        this.zwischenContainer = new VBox();                                                                            //Neue Box in der dann alle Eigenschaften des Upgrades sind zum besseren Handhaben
+        zwischenContainer.getChildren().addAll(name, price, amount);                                                    //Aufnehmen der Eigenschaften in dem Zwischencontainer
+        zwischenContainer.setSpacing(1);                                                                                //Weitere Formatierung
         shopElements.setSpacing(5);
-        shopElements.getChildren().addAll(buy, zwischenContainer);                            //Aufnehmen der restlichen Eigenschaften und der Zwischenbox im finalen Shopelement
+        shopElements.getChildren().addAll(buy, zwischenContainer);                                                      //Aufnehmen der restlichen Eigenschaften und der Zwischenbox im finalen Shopelement
         shopElements.setAlignment(Pos.CENTER_LEFT);
-        shopElements.setVisible(false);                                                             //Sichtbarkeit der Shopbox
+        shopElements.setVisible(false);                                                                                 //Sichtbarkeit der Shopbox
     }
 
     /* Funktionen der Shopitems */
 
-    public HBox getShopElements() {                                                                 //Getter fÃ¼r die Elemente
+    public HBox getShopElements() {                                                                                     //Getter fÃ¼r die Elemente
         return shopElements;
     }
 

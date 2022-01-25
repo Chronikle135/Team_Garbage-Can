@@ -7,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -18,7 +17,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -59,10 +57,6 @@ public class Main extends Application implements Serializable {
     Scene mainScene = new Scene(finalcontainer, WIDTH, HEIGHT);
     Scene pauseScene = new Scene(containerPauseBox);
     Button errorButton = new Button();
-    Popup save = new Popup();
-    Popup load = new Popup();
-    Label saved = new Label("Saved successfully");
-    Label loaded = new Label("Loaded successfully");
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
@@ -74,7 +68,6 @@ public class Main extends Application implements Serializable {
         Muellcontainer müllcontainer = new Muellcontainer();
         OeffentlicheMuelltonne OeffentlicheMuelltonne = new OeffentlicheMuelltonne();
         Muellabfuhr muellabfuhr = new Muellabfuhr();
-        //Restmuell restmuell = new Restmuell();
         //Papiermuell papiermuell = new Papiermuell();
         //Wertstoffhof wertstoffhof = new Wertstoffhof();
 
@@ -102,8 +95,6 @@ public class Main extends Application implements Serializable {
         Text clickPower = new Text();
         Text playTime = new Text();
         Text sumOfGarbage = new Text();
-        Text notEnoughCans = new Text();
-
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Texte und ihre Eigenschaften */
 
@@ -145,7 +136,6 @@ public class Main extends Application implements Serializable {
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Trashcanbutton */
-        //Erstellen eines neuen Buttons
         canButton.setMinWidth(icon.getWidth() / 2);                                                                     //Höhe und Breite Variabel machen
         canButton.setMinHeight(icon.getHeight() / 2);                                                                   //Optische hexereien um dem ganzen ein Icon zuzuweisen und den Hintergrund auszublenden
         canButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/garbage-can.png);" +
@@ -173,16 +163,8 @@ public class Main extends Application implements Serializable {
         middleBox.setMinHeight(HEIGHT - 150);
         middleBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/middleboxLight.png);");
 
-
-
-        /*
-                -fx-border-left: black;" +
-                "-fx-border-style: solid none solid solid;" +
-                "-fx-border-width: 5;"
-         */
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Linke Box */
-
         leftSideBox.setMinWidth(200);
         leftSideBox.setMinHeight(HEIGHT - 150);
         leftSideBox.setPadding(new Insets(82, 5, 4, 5));
@@ -190,19 +172,15 @@ public class Main extends Application implements Serializable {
         for (Upgrade2 u : Upgrade2.upgradeList2) {                                                                      //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             leftSideBox.getChildren().add(u.getShopItem2());
         }
-
-
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Rechte/Shop Box */
         rigthSideBoxTop.setMinWidth(200);
         rigthSideBoxTop.setMinHeight(HEIGHT - 150);
         rigthSideBoxTop.setPadding(new Insets(82, 5, 4, 5));
         rigthSideBoxTop.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/sideboxNGarbage.png);");
-        //store = new ImageView("url(/at/acfhcampus/stud/team_garbagecan/store.jpg)");
         for (Upgrades u : Upgrades.upgradeList) {                                                                       //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             rigthSideBoxTop.getChildren().add(u.getShopItem());
         }
-
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         errorButton.setMinWidth(200);
         errorButton.setMinHeight(200);
@@ -233,7 +211,6 @@ public class Main extends Application implements Serializable {
         containerPauseBox.getChildren().addAll(pause1, pause2, pause3);
         containerPauseBox.setMinWidth(700);
         containerPauseBox.setMinHeight(700);
-
         containerPauseBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pauseBackground.png);");
         // Continue Button
         pause1.setMinHeight(50);
@@ -246,11 +223,8 @@ public class Main extends Application implements Serializable {
         continueButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/continue.png);" +
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
-        continueButton.setOnMouseClicked(t -> {
-            primaryStage.setScene(mainScene);
-            load.setOpacity(0);
-            save.setOpacity(0);
-        });
+        continueButton.setOnMouseClicked(t -> primaryStage.setScene(mainScene));
+
         pause2.setMinHeight(50);
         pause2.setMinWidth(300);
         pause2.setAlignment(Pos.CENTER);
@@ -272,13 +246,10 @@ public class Main extends Application implements Serializable {
             timerSaved.schedule(new TimerTask() {
                 @Override
                 public void run() {
-
                     containerPauseBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pauseBackground.png);");
                 }
             }, 1000);//wait 1000ms before doing the action
-
             containerPauseBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pauseBackgroundSaved.png);");
-
         });
 
         //Load Button
@@ -293,14 +264,12 @@ public class Main extends Application implements Serializable {
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
         loadButton.setOnMouseClicked(f ->
-
         {
             try {
                 loadGame();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
             Timer timerLoaded = new Timer();
             timerLoaded.schedule(new TimerTask() {
                 @Override
@@ -312,12 +281,6 @@ public class Main extends Application implements Serializable {
 
             containerPauseBox.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/pauseBackgroundLoaded.png);");
         });
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        /* Einblenden einer Hintergrundfarbe für die 3 zentralen Boxen zum Bugtesten */
-        /*trashCanBox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
-        shopBox.setBackground(new Background(new BackgroundFill(Color.MAGENTA, CornerRadii.EMPTY, Insets.EMPTY)));
-        leftSideBox.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));*/
-
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Erstellen und Eigenschafte der Szene */
@@ -326,20 +289,6 @@ public class Main extends Application implements Serializable {
         primaryStage.setTitle("Garbage-Clicker");
         primaryStage.setScene(mainScene);
         primaryStage.show();
-
-        save.centerOnScreen();
-        save.setHeight(150);
-        save.setWidth(150);
-        //save.getContent().add(saved);
-        save.show(primaryStage);
-        save.setOpacity(0);
-
-        load.centerOnScreen();
-        load.setHeight(150);
-        load.setWidth(150);
-        //load.getContent().add(loaded);
-        load.show(primaryStage);
-        load.setOpacity(0);
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         /* Timer und seine Funktionen */
@@ -388,15 +337,13 @@ public class Main extends Application implements Serializable {
                 changeTo = 0;
             }
         };
-        tick.schedule(getting, 0, TICKRATE);                                        //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
+        tick.schedule(getting, 0, TICKRATE);                                                                      //Scheduler der einen Timertask ausführ in einer gewissen periodizität. In diesem Fall wird getting ausgeführt ab Zeitpunkt 0 und das alle 1000ms(Tickrate).
         tick.schedule(money, 0, 1);
-        // Close Game
-
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* Funktionen die wir brauchen */
-    private void clicki() {                                                             //Klickevent dass bei jedem Klick passiert
+    private void clicki() {                                                                                             //Klickevent dass bei jedem Klick passiert
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -413,28 +360,21 @@ public class Main extends Application implements Serializable {
                 "-fx-background-size: 100%;" +
                 "-fx-background-color: transparent;");
 
-        cash = cash.add(BigInteger.valueOf(clickingPower));                             //clickingPower gibt an wie viel Währung man pro Klick bekommt
+        cash = cash.add(BigInteger.valueOf(clickingPower));                                                             //clickingPower gibt an wie viel Währung man pro Klick bekommt
         cashTrace = cashTrace.add(BigInteger.valueOf(clickingPower));
     }
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public static BigInteger getCash() {                                                //Getter damit wir uns die Cashvariabel von überall holen können und sie trotzdem noch protected ist
-        return cash;
-    }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    public static boolean visibility(Upgrades irgendwas) {                              //Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+    public static boolean visibility(Upgrades irgendwas) {                                                              //Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
         if (irgendwas.getShopItem().isVisible()) return true;
         else return irgendwas.cost <= getCash().doubleValue();
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    public static boolean visibility2(Upgrade2 irgendwas) {                             //Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
+    public static boolean visibility2(Upgrade2 irgendwas) {                                                             //Boolean der uns sagt ob ein Upgrade sichtbar sein soll oder nicht
         if (irgendwas.getShopItem2().isVisible()) return true;
         else return irgendwas.cost <= getCash().doubleValue();
     }
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static int perSecond() {
         int sumOfIncome = 0;
         for (Upgrades u : Upgrades.upgradeList) {
@@ -442,17 +382,7 @@ public class Main extends Application implements Serializable {
         }
         return sumOfIncome;
     }
-
-    public void setCashTrace(BigInteger cashTrace) {
-        this.cashTrace = cashTrace;
-    }
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    public static void setCash(BigInteger cash) {                                       //Setter für unsere Währung
-        Main.cash = cash;
-    }
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /*Save Game */
     public void saveGame() throws IOException {
         FileOutputStream fos = new FileOutputStream("src/main/saveGame/saveGame.txt");
@@ -469,9 +399,9 @@ public class Main extends Application implements Serializable {
         oos.writeUTF(String.valueOf(cashTrace));
         oos.writeUTF(String.valueOf(time));
         oos.close();
-        save.setOpacity(1);
     }
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    /*Load Game*/
     public void loadGame() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream("src/main/saveGame/saveGame.txt");
         ObjectInputStream ois = new ObjectInputStream(fis);
@@ -489,13 +419,25 @@ public class Main extends Application implements Serializable {
         setCashTrace(BigInteger.valueOf(Long.parseLong(ois.readUTF())));
         time = Integer.parseInt(ois.readUTF());
         ois.close();
-        load.setOpacity(1);
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     /* Main die unser Programm startet */
     public static void main(String[] args) {
         launch(args);
     }
 
-}//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public void setCashTrace(BigInteger cashTrace) {
+        this.cashTrace = cashTrace;
+    }
+
+    public static void setCash(BigInteger cash) {                                       //Setter für unsere Währung
+        Main.cash = cash;
+    }
+
+    public static BigInteger getCash() {                                                //Getter damit wir uns die Cashvariabel von überall holen können und sie trotzdem noch protected ist
+        return cash;
+    }
+}
