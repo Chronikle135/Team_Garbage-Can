@@ -171,10 +171,7 @@ public class Main extends Application implements Serializable {
         for (Upgrades u : Upgrades.upgradeList) {                                                                       //Durchiterieren der Upgradeliste wobei jedes Element in den Shop aufgenommen wird
             rigthSideBoxTop.getChildren().add(u.getShopItem());
         }
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        errorButton.setMinWidth(200);
-        errorButton.setMinHeight(200);
-        errorButton.setStyle("![](../../../../../resources/at/acfhcampus/stud/team_garbagecan/stopSignEmpty.png)");
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         pauseButton.setMinWidth(100);
         pauseButton.setMinHeight(25);
@@ -344,7 +341,7 @@ public class Main extends Application implements Serializable {
                         "-fx-background-size: 100%;" +
                         "-fx-background-color: transparent;");
             }
-        }, 200);//wait 1000ms before doing the action
+        }, 200);//wait 200ms before doing the action
 
         canButton.setStyle("-fx-background-image: url(/at/acfhcampus/stud/team_garbagecan/garbage-can_small_plus.png);" +
                 "-fx-background-size: 100%;" +
