@@ -56,7 +56,6 @@ public class Main extends Application implements Serializable {
     Button loadButton = new Button();
     Scene mainScene = new Scene(finalcontainer, WIDTH, HEIGHT);
     Scene pauseScene = new Scene(containerPauseBox);
-    Button errorButton = new Button();
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
